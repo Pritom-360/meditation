@@ -868,7 +868,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (audioStartOverlay && audioStartBtn && bgMusic) { // Only if all three exist
         // Show overlay initially if bgMusic is supposed to autoplay but might be blocked
         if (bgMusic.hasAttribute('autoplay')) {
-             // Check if audio is actually playing. If not, show overlay.
+            // Check if audio is actually playing. If not, show overlay.
             setTimeout(() => { // Give browser a moment to attempt autoplay
                 if (bgMusic.paused) {
                     audioStartOverlay.style.display = 'flex';
@@ -878,20 +878,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }, 200);
         } else {
-             audioStartOverlay.style.display = 'none'; // No autoplay, no need for overlay
+            audioStartOverlay.style.display = 'none'; // No autoplay, no need for overlay
         }
 
         audioStartBtn.addEventListener('click', function() {
+            // Set userInteracted immediately
             if (!userInteracted) handleFirstUserInteraction({type: 'audioStartBtnClick'}); // Critical
-            
+
+            // Try to play bgMusic, and only hide overlay after playback starts
             const playPromise = bgMusic.play();
             if (playPromise !== undefined) {
                 playPromise.then(() => {
                     audioStartOverlay.style.display = 'none';
-                }).catch(() => {
-                    audioStartOverlay.style.display = 'none'; 
+                }).catch((err) => {
+                    // Show overlay and optionally show a message if playback fails
+                    audioStartOverlay.style.display = 'flex';
+                    // Optionally: alert("Unable to start background music. Please check your browser settings.");
+                    console.warn("[BG Music] Playback failed after overlay click:", err);
                 });
             } else {
+                // For very old browsers, just hide overlay
                 audioStartOverlay.style.display = 'none';
             }
         });
