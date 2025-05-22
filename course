@@ -1,0 +1,60 @@
+    <!-- Courses Section -->
+    <section id="courses" class="courses-section py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Mindfulness Courses</h2>
+                <p class="section-subtitle">Structured programs to deepen your practice</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1516534775068-ba3e7458af70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MzF8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="Mindfulness Basics" class="course-image">
+                        <div class="course-badge">Beginner</div>
+                        <div class="course-content">
+                            <h4>Mindfulness Basics</h4>
+                            <p class="course-description">Learn the fundamentals of mindfulness and establish a daily routine.</p>
+                            <div class="course-meta">
+                                <span><i class="fas fa-play-circle"></i> 5 sessions</span>
+                                <span><i class="fas fa-clock"></i> 10 min/day</span>
+                            </div>
+                            <a href="home.html#courses" class="btn btn-primary w-100 mt-3 course-start-btn">Explore Course</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1505527068386-19cb436585a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NDd8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="Stress Reduction Techniques" class="course-image">
+                        <div class="course-badge">Intermediate</div>
+                        <div class="course-content">
+                            <h4>Stress Reduction</h4>
+                            <p class="course-description">Practical techniques to manage stress and cultivate resilience.</p>
+                            <div class="course-meta">
+                                <span><i class="fas fa-play-circle"></i> 8 sessions</span>
+                                <span><i class="fas fa-clock"></i> 15 min/day</span>
+                            </div>
+                            <a href="home.html#courses" class="btn btn-primary w-100 mt-3 course-start-btn">Explore Course</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1597852074358-294c96df59c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NTB8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="Cultivating Compassion" class="course-image">
+                        <div class="course-badge">All Levels</div>
+                        <div class="course-content">
+                            <h4>Cultivating Compassion</h4>
+                            <p class="course-description">Develop self-compassion and empathy towards others through guided practices.</p>
+                            <div class="course-meta">
+                                <span><i class="fas fa-play-circle"></i> 6 sessions</span>
+                                <span><i class="fas fa-clock"></i> 10-12 min/day</span>
+                            </div>
+                           <a href="home.html#courses" class="btn btn-primary w-100 mt-3 course-start-btn">Explore Course</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="text-center mt-5">
+                <a href="home.html#courses" class="btn btn-outline-primary" id="view-all-courses-meditation">View All Courses on Home</a>
+            </div>
+        </div>
+    </section>

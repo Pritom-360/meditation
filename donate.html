@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate | MindfulSpace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .page-hero-section {
+            padding: 100px 0 60px;
+            background: linear-gradient(135deg, var(--success-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+        }
+        .page-hero-section h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .content-section {
+            padding: 60px 0;
+        }
+        .donation-impact-card {
+            background-color: var(--lighter-color);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary-color);
+        }
+        .donation-impact-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        .donation-options .btn {
+            margin: 5px;
+            min-width: 120px;
+        }
+        .donation-form .form-control, .donation-form .form-select {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="loader-line-wrap" style="--i:0"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:1"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:2"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:3"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:4"><div class="loader-line"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">
+                <img src="assets/logo.svg" alt="MindfulSpace" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="meditation.html#meditate">Meditate</a></li>
+                    <li class="nav-item"><a class="nav-link" href="meditation.html#sleep">Sleep</a></li>
+                    <li class="nav-item"><a class="nav-link" href="meditation.html#courses">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="donate.html">Donate</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero Section -->
+    <section class="page-hero-section">
+        <div class="container">
+            <h1 class="animate__animated animate__fadeInDown">Support MindfulSpace</h1>
+            <p class="lead animate__animated animate__fadeInUp animate__delay-1s">Help me keep mindfulness accessible to everyone.</p>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">Why Your Support Matters</h2>
+                    <p class="lead">MindfulSpace is committed to providing free access to a core library of mindfulness resources. Your generous donations help me cover operational costs, develop new content, expand my reach, and maintain my platform as a sanctuary for all who seek peace and wellbeing.</p>
+                    <p>Every contribution, no matter the size, makes a significant impact.</p>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-md-4">
+                    <div class="donation-impact-card">
+                        <i class="fas fa-heartbeat"></i>
+                        <h4>Content Creation</h4>
+                        <p>Fund the development of new guided meditations, sleep stories, and courses by me.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="donation-impact-card">
+                        <i class="fas fa-server"></i>
+                        <h4>Platform Maintenance</h4>
+                        <p>Help me cover server costs, app updates, and technical support to ensure a smooth experience for all users.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="donation-impact-card">
+                        <i class="fas fa-globe-americas"></i>
+                        <h4>Expanding Reach</h4>
+                        <p>Support my efforts to make MindfulSpace available to more people worldwide, including underserved communities.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <h3 class="text-center mb-4">Make a Donation</h3>
+                    <p class="text-center">Choose an amount or enter a custom one. I deeply appreciate your support!</p>
+                    
+                    <div class="donation-options text-center mb-4">
+                        <button class="btn btn-outline-primary btn-lg donation-amount-btn" data-amount="200">৳200</button>
+                        <button class="btn btn-outline-primary btn-lg donation-amount-btn" data-amount="500">৳500</button>
+                        <button class="btn btn-outline-primary btn-lg donation-amount-btn" data-amount="1000">৳1000</button>
+                        <button class="btn btn-outline-primary btn-lg donation-amount-btn" data-amount="2000">৳2000</button>
+                    </div>
+
+                    <!-- bKash Donation Section -->
+                    <div class="card mb-4 shadow-sm border-success">
+                        <div class="card-body text-center">
+                            <h4 class="mb-3"><img src="https://www.bkash.com/sites/all/themes/bkash/logo.png" alt="bKash" style="height:32px;vertical-align:middle;margin-right:8px;">Donate via bKash</h4>
+                            <p class="mb-2">Send your donation to the following bKash number:</p>
+                            <div class="d-flex justify-content-center align-items-center mb-2">
+                                <span id="bkash-number" class="fw-bold fs-4 me-2 text-success">01731122454</span>
+                                <button class="btn btn-outline-secondary btn-sm" id="copyBkashBtn" title="Copy Number"><i class="fas fa-copy"></i></button>
+                            </div>
+                            <p class="mb-2">After sending, please mention your name in the reference (if possible).</p>
+                            <div class="alert alert-info py-2 mb-0">
+                                <strong>Note:</strong> This is a manual process. After sending your donation, you may <a href="contact.html">contact me</a> for confirmation if you wish.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Demo Donation Form (No real payment) -->
+                    <form id="donationForm" class="donation-form">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">৳</span>
+                            <input type="number" class="form-control form-control-lg" id="customAmount" placeholder="Custom Amount" min="1">
+                        </div>
+                        <select class="form-select form-select-lg mb-3" id="donationFrequency">
+                            <option selected value="one-time">One-time Donation</option>
+                            <option value="monthly">Monthly Donation</option>
+                        </select>
+                        <div class="alert alert-warning text-center">
+                            <strong>Demo Only:</strong> This form does not process real payments. Please use the bKash method above for actual donations.
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill">Donate Now (Demo)</button>
+                    </form>
+                    <div id="donation-message" class="mt-3"></div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <p>If you have questions about donations or wish to explore other ways to support me (like partnerships or volunteering), please <a href="contact.html">contact me</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <img src="assets/logo-white.svg" alt="MindfulSpace" height="30" class="mb-3">
+                    <p>Helping you find peace and clarity through mindfulness meditation since 2020.</p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Explore</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="meditation.html#meditate">Meditate</a></li>
+                        <li><a href="meditation.html#sleep">Sleep</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <!-- In home.html, meditation.html footers -->
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="about.html" id="about-link-footer">About Us</a></li>
+                        <li><a href="mission.html" id="mission-link">Our Mission</a></li>
+                        <li><a href="contact.html" id="contact-link">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- In footers of all pages -->
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="help.html" id="help-link">Help Center</a></li>
+                        <li><a href="faq.html" id="faq-link">FAQ</a></li>
+                        <li><a href="donate.html" id="donate-link">Donate</a></li>
+                        <li><a href="feedback.html" id="feedback-link">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Download</h5>
+                    <div class="app-download">
+                        <a href="#" class="d-block mb-2" id="app-store-link">
+                            <img src="assets/app-store.svg" alt="App Store" class="img-fluid">
+                        </a>
+                        <a href="#" class="d-block" id="google-play-link">
+                            <img src="assets/google-play.svg" alt="Google Play" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // bKash copy button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const copyBtn = document.getElementById('copyBkashBtn');
+            const bkashNumber = document.getElementById('bkash-number');
+            if(copyBtn && bkashNumber) {
+                copyBtn.addEventListener('click', function() {
+                    navigator.clipboard.writeText(bkashNumber.textContent.trim());
+                    copyBtn.innerHTML = '<i class="fas fa-check text-success"></i>';
+                    setTimeout(() => {
+                        copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+                    }, 1500);
+                });
+            }
+        });
+
+        const donationAmountBtns = document.querySelectorAll('.donation-amount-btn');
+        const customAmountInput = document.getElementById('customAmount');
+        const donationForm = document.getElementById('donationForm');
+        const donationMessage = document.getElementById('donation-message');
+
+        donationAmountBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(customAmountInput) customAmountInput.value = this.getAttribute('data-amount');
+                donationAmountBtns.forEach(b => b.classList.remove('active', 'btn-primary'));
+                donationAmountBtns.forEach(b => b.classList.add('btn-outline-primary'));
+                this.classList.add('active', 'btn-primary');
+                this.classList.remove('btn-outline-primary');
+            });
+        });
+
+        if(customAmountInput) {
+            customAmountInput.addEventListener('input', function() {
+                donationAmountBtns.forEach(b => b.classList.remove('active', 'btn-primary'));
+                donationAmountBtns.forEach(b => b.classList.add('btn-outline-primary'));
+            });
+        }
+        
+        if(donationForm) {
+            donationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const amount = customAmountInput ? customAmountInput.value : '0';
+                const frequency = document.getElementById('donationFrequency').value;
+                if (amount && parseFloat(amount) > 0) {
+                    if (donationMessage) donationMessage.innerHTML = `<div class="alert alert-success">Thank you for your generous ${frequency} donation of ৳${amount}! (Demo only. For real donations, please use bKash above.)</div>`;
+                    donationForm.reset();
+                    donationAmountBtns.forEach(b => b.classList.remove('active', 'btn-primary'));
+                    donationAmountBtns.forEach(b => b.classList.add('btn-outline-primary'));
+                } else {
+                   if (donationMessage) donationMessage.innerHTML = '<div class="alert alert-danger">Please enter a valid donation amount.</div>';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

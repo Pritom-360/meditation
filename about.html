@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | MindfulSpace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Note: Owl Carousel CSS not strictly needed here unless you add a carousel -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .page-hero-section {
+            padding: 100px 0 60px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            text-align: center;
+        }
+        .page-hero-section h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .content-section {
+            padding: 60px 0;
+        }
+        .team-member-card {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .team-member-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid var(--primary-color);
+        }
+        .team-member-card h5 {
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+        .team-member-card p.role {
+            color: var(--darker-color);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="loader-line-wrap" style="--i:0"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:1"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:2"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:3"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:4"><div class="loader-line"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">
+                <img src="assets/logo.svg" alt="MindfulSpace" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="meditation.html#meditate">Meditate</a></li>
+                    <li class="nav-item"><a class="nav-link" href="meditation.html#sleep">Sleep</a></li>
+                    <li class="nav-item"><a class="nav-link" href="meditation.html#courses">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero Section -->
+    <section class="page-hero-section">
+        <div class="container">
+            <h1 class="animate__animated animate__fadeInDown">About Me</h1>
+            <p class="lead animate__animated animate__fadeInUp animate__delay-1s">Learn about the creator of MindfulSpace</p>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="row mb-5 align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title text-start">My Story</h2>
+                    <p>Hi, I'm Pritom Bhowmik, the creator of MindfulSpace. I'm currently pursuing my undergraduate degree in Computer Science and Engineering at East West University.</p>
+                    <p>MindfulSpace was born from my passion for mindfulness and technology. As a CSE student, I wanted to create a platform that could help others find peace and balance in their daily lives through meditation.</p>
+                    <p>This project combines my technical skills with my personal interest in mental wellness, allowing me to contribute to people's well-being while growing as a developer.</p>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <!-- Replace this image with your actual photo -->
+                    <img src="assets/images/pritom.png" alt="Pritom Bhowmik" class="img-fluid rounded shadow-sm">
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="section-title">My Values</h2>
+                </div>
+                <div class="col-md-4">
+                    <div class="benefit-card text-center p-4">
+                        <div class="benefit-icon mx-auto"><i class="fas fa-universal-access"></i></div>
+                        <h3>Accessibility</h3>
+                        <p>I believe mental wellbeing tools should be available to all, which is why my core content is free.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="benefit-card text-center p-4">
+                        <div class="benefit-icon mx-auto"><i class="fas fa-check-circle"></i></div>
+                        <h3>Quality</h3>
+                        <p>My content is created with care and grounded in mindfulness research.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="benefit-card text-center p-4">
+                        <div class="benefit-icon mx-auto"><i class="fas fa-users"></i></div>
+                        <h3>Community</h3>
+                        <p>I foster a supportive environment where users can learn, grow, and connect.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-center mb-4">
+                    <h2 class="section-title">Education & Skills</h2>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-member-card">
+                        <i class="fas fa-graduation-cap fa-3x mb-3"></i>
+                        <h5>Education</h5>
+                        <p class="role">BSc in CSE<br>East West University</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-member-card">
+                        <i class="fas fa-code fa-3x mb-3"></i>
+                        <h5>Development</h5>
+                        <p class="role">Web Development<br>Software Engineering</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-member-card">
+                        <i class="fas fa-heart fa-3x mb-3"></i>
+                        <h5>Interests</h5>
+                        <p class="role">Meditation<br>Technology</p>
+                    </div>
+                </div>
+            </div>
+             <div class="text-center mt-5">
+                <a href="mission.html" class="btn btn-primary btn-lg rounded-pill px-4">Learn About My Mission</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section py-5">
+        <div class="container">
+            <div class="newsletter-box rounded p-5">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h3>Stay Connected</h3>
+                        <p>Subscribe for mindfulness tips, new content, and updates from me.</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <form class="newsletter-form" id="newsletter-form-about">
+                            <div class="input-group">
+                                <input type="email" class="form-control" placeholder="Your email address" id="newsletter-email-about" required>
+                                <button class="btn btn-primary" type="submit">Subscribe</button>
+                            </div>
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" id="privacy-check-about" required>
+                                <label class="form-check-label" for="privacy-check-about">
+                                    I agree to the privacy policy
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <img src="assets/logo-white.svg" alt="MindfulSpace" height="30" class="mb-3">
+                    <p>Helping you find peace and clarity through mindfulness meditation since 2020.</p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Explore</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="meditation.html#meditate">Meditate</a></li>
+                        <li><a href="meditation.html#sleep">Sleep</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="about.html" id="about-link-footer">About Me</a></li>
+                        <li><a href="mission.html" id="mission-link">My Mission</a></li>
+                        <li><a href="contact.html" id="contact-link">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- In footers of all pages -->
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="help.html" id="help-link">Help Center</a></li>
+                        <li><a href="faq.html" id="faq-link">FAQ</a></li>
+                        <li><a href="donate.html" id="donate-link">Donate</a></li>
+                        <li><a href="feedback.html" id="feedback-link">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Download</h5>
+                    <div class="app-download">
+                        <a href="#" class="d-block mb-2" id="app-store-link">
+                            <img src="assets/app-store.svg" alt="App Store" class="img-fluid">
+                        </a>
+                        <a href="#" class="d-block" id="google-play-link">
+                            <img src="assets/google-play.svg" alt="Google Play" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Add Owl Carousel JS if you plan to use it on this page -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Specific newsletter form handler for this page
+        const newsletterFormAbout = document.getElementById('newsletter-form-about');
+        if (newsletterFormAbout) {
+            newsletterFormAbout.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const emailInput = document.getElementById('newsletter-email-about');
+                const privacyCheck = document.getElementById('privacy-check-about');
+                if (!emailInput.value || !emailInput.checkValidity()) {
+                    alert("Please enter a valid email address.");
+                    emailInput.focus();
+                    return;
+                }
+                if (!privacyCheck.checked) {
+                    alert("Please agree to the privacy policy.");
+                    privacyCheck.focus();
+                    return;
+                }
+                alert("Thank you for subscribing!");
+                this.reset();
+            });
+        }
+    </script>
+</body>
+</html>

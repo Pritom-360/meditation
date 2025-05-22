@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback | MindfulSpace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .page-hero-section {
+            padding: 100px 0 60px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-dark));
+            color: white;
+            text-align: center;
+        }
+        .page-hero-section h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .content-section {
+            padding: 60px 0;
+        }
+        .feedback-form .form-control, .feedback-form .form-select {
+            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .feedback-form textarea.form-control {
+            min-height: 150px;
+        }
+        .rating-stars {
+            font-size: 1.8rem;
+            color: var(--warning-color); /* Gold for stars */
+            margin-bottom: 20px;
+        }
+        .rating-stars .star {
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .rating-stars .star:hover,
+        .rating-stars .star.selected {
+            color: var(--warning-color); /* Ensure it stays gold or a brighter gold */
+        }
+        .rating-stars .star.dim {
+             color: var(--lighter-color); /* Or a light grey for unselected stars */
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="loader-line-wrap" style="--i:0"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:1"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:2"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:3"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:4"><div class="loader-line"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">
+                <img src="assets/logo.svg" alt="MindfulSpace" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="meditation.html#meditate">Meditate</a></li>
+                    <li class="nav-item"><a class="nav-link" href="meditation.html#sleep">Sleep</a></li>
+                    <li class="nav-item"><a class="nav-link" href="meditation.html#courses">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="feedback.html">Feedback</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero Section -->
+    <section class="page-hero-section">
+        <div class="container">
+            <h1 class="animate__animated animate__fadeInDown">Share Your Feedback</h1>
+            <p class="lead animate__animated animate__fadeInUp animate__delay-1s">Your thoughts help me grow and improve MindfulSpace for everyone.</p>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <p class="text-center lead mb-4">I value your input! Whether you have a suggestion, a compliment, or constructive criticism, please let me know. Your feedback is crucial in shaping the future of MindfulSpace.</p>
+                    
+                    <form id="feedbackForm" class="feedback-form">
+                        <div class="mb-3">
+                            <label for="feedbackName" class="form-label">Your Name (Optional)</label>
+                            <input type="text" class="form-control" id="feedbackName" placeholder="Enter your name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="feedbackEmail" class="form-label">Your Email (Optional, if you'd like a response)</label>
+                            <input type="email" class="form-control" id="feedbackEmail" placeholder="Enter your email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="feedbackType" class="form-label">Type of Feedback <span class="text-danger">*</span></label>
+                            <select class="form-select" id="feedbackType" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option value="suggestion">Suggestion / Idea</option>
+                                <option value="compliment">Compliment / Positive Feedback</option>
+                                <option value="bug_report">Bug Report / Technical Issue</option>
+                                <option value="content_feedback">Content Feedback (Meditations, Courses, etc.)</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Overall Experience Rating <span class="text-danger">*</span></label>
+                            <div class="rating-stars text-center" id="feedbackRating">
+                                <i class="fas fa-star star dim" data-value="1"></i>
+                                <i class="fas fa-star star dim" data-value="2"></i>
+                                <i class="fas fa-star star dim" data-value="3"></i>
+                                <i class="fas fa-star star dim" data-value="4"></i>
+                                <i class="fas fa-star star dim" data-value="5"></i>
+                            </div>
+                            <input type="hidden" id="ratingValue" name="ratingValue" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="feedbackMessage" class="form-label">Your Feedback <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="feedbackMessage" rows="5" placeholder="Please share your detailed feedback here..." required></textarea>
+                        </div>
+                        
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="" id="allowContact">
+                            <label class="form-check-label" for="allowContact">
+                                It's okay to contact me about this feedback (if email provided).
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5">Submit Feedback</button>
+                    </form>
+                    <div id="feedback-form-message" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <img src="assets/logo-white.svg" alt="MindfulSpace" height="30" class="mb-3">
+                    <p>Helping you find peace and clarity through mindfulness meditation since 2020.</p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Explore</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="meditation.html#meditate">Meditate</a></li>
+                        <li><a href="meditation.html#sleep">Sleep</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <!-- In home.html, meditation.html footers -->
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="about.html" id="about-link-footer">About Us</a></li>
+                        <li><a href="mission.html" id="mission-link">Our Mission</a></li>
+                        <li><a href="contact.html" id="contact-link">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- In footers of all pages -->
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="help.html" id="help-link">Help Center</a></li>
+                        <li><a href="faq.html" id="faq-link">FAQ</a></li>
+                        <li><a href="donate.html" id="donate-link">Donate</a></li>
+                        <li><a href="feedback.html" id="feedback-link">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Download</h5>
+                    <div class="app-download">
+                        <a href="#" class="d-block mb-2" id="app-store-link">
+                            <img src="assets/app-store.svg" alt="App Store" class="img-fluid">
+                        </a>
+                        <a href="#" class="d-block" id="google-play-link">
+                            <img src="assets/google-play.svg" alt="Google Play" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        const feedbackForm = document.getElementById('feedbackForm');
+        const feedbackFormMessage = document.getElementById('feedback-form-message');
+        const ratingStarsContainer = document.getElementById('feedbackRating');
+        const ratingValueInput = document.getElementById('ratingValue');
+
+        if (ratingStarsContainer) {
+            const stars = ratingStarsContainer.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const value = this.getAttribute('data-value');
+                    if(ratingValueInput) ratingValueInput.value = value;
+                    stars.forEach(s => {
+                        s.classList.remove('selected');
+                        s.classList.add('dim');
+                        if (parseInt(s.getAttribute('data-value')) <= parseInt(value)) {
+                            s.classList.add('selected');
+                            s.classList.remove('dim');
+                        }
+                    });
+                });
+                star.addEventListener('mouseover', function() {
+                     const hoverValue = this.getAttribute('data-value');
+                     stars.forEach(s => {
+                        s.style.color = parseInt(s.getAttribute('data-value')) <= parseInt(hoverValue) ? 'var(--warning-color)' : 'var(--lighter-color)';
+                     });
+                });
+                 star.addEventListener('mouseout', function() {
+                    const currentValue = ratingValueInput ? ratingValueInput.value : 0;
+                     stars.forEach(s => {
+                        s.style.color = parseInt(s.getAttribute('data-value')) <= parseInt(currentValue) ? 'var(--warning-color)' : 'var(--lighter-color)';
+                     });
+                });
+            });
+        }
+
+
+        if (feedbackForm) {
+            feedbackForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const type = document.getElementById('feedbackType').value;
+                const rating = ratingValueInput ? ratingValueInput.value : '';
+                const message = document.getElementById('feedbackMessage').value;
+
+                if (!type) {
+                     if(feedbackFormMessage) feedbackFormMessage.innerHTML = '<div class="alert alert-danger">Please select a feedback type.</div>';
+                    return;
+                }
+                if (!rating) {
+                     if(feedbackFormMessage) feedbackFormMessage.innerHTML = '<div class="alert alert-danger">Please provide a rating.</div>';
+                    return;
+                }
+                if (!message) {
+                     if(feedbackFormMessage) feedbackFormMessage.innerHTML = '<div class="alert alert-danger">Please enter your feedback message.</div>';
+                    return;
+                }
+
+                // Simulate form submission
+                if(feedbackFormMessage) {
+                    feedbackFormMessage.innerHTML = '<div class="alert alert-success">Thank you for your feedback! I appreciate you taking the time to help me improve.</div>';
+                }
+                feedbackForm.reset();
+                if (ratingValueInput) ratingValueInput.value = ''; // Reset hidden rating
+                if (ratingStarsContainer) { // Reset visual stars
+                     ratingStarsContainer.querySelectorAll('.star').forEach(s => {
+                        s.classList.remove('selected');
+                        s.classList.add('dim');
+                        s.style.color = 'var(--lighter-color)'; // Reset explicit style
+                     });
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Mission | MindfulSpace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .page-hero-section {
+            padding: 100px 0 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); /* Consistent hero */
+            color: white;
+            text-align: center;
+        }
+        .page-hero-section h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .content-section {
+            padding: 60px 0;
+        }
+        .mission-statement {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--primary-dark);
+            margin-bottom: 30px;
+            padding: 20px;
+            border-left: 5px solid var(--accent-color);
+            background-color: var(--lighter-color);
+            border-radius: 0 8px 8px 0;
+        }
+        .key-pillar {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .key-pillar-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-right: 20px;
+            min-width: 40px; /* Ensure icon alignment */
+            text-align: center;
+        }
+        .key-pillar-content h4 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="loader-line-wrap" style="--i:0"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:1"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:2"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:3"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:4"><div class="loader-line"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">
+                <img src="assets/logo.svg" alt="MindfulSpace" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="meditation.html#meditate">Meditate</a></li>
+                    <li class="nav-item"><a class="nav-link" href="meditation.html#sleep">Sleep</a></li>
+                    <li class="nav-item"><a class="nav-link" href="meditation.html#courses">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="mission.html">My Mission</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero Section -->
+    <section class="page-hero-section">
+        <div class="container">
+            <h1 class="animate__animated animate__fadeInDown">My Mission</h1>
+            <p class="lead animate__animated animate__fadeInUp animate__delay-1s">Guiding you towards inner peace and wellbeing, one breath at a time.</p>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-10 text-center">
+                    <p class="mission-statement">
+                        "To empower individuals worldwide to cultivate mindfulness, reduce stress, and enhance their overall wellbeing by providing accessible, high-quality meditation resources and fostering a supportive global community."
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-center mb-4">
+                    <h2 class="section-title">My Guiding Principles</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="key-pillar">
+                        <div class="key-pillar-icon"><i class="fas fa-heart"></i></div>
+                        <div class="key-pillar-content">
+                            <h4>Empowerment through Accessibility</h4>
+                            <p>I strive to break down barriers to mental wellness. My core library of meditations, sleep stories, and introductory courses will always be free, ensuring that everyone, regardless of their financial situation, can access tools to support their mindfulness journey.</p>
+                        </div>
+                    </div>
+                    <div class="key-pillar">
+                        <div class="key-pillar-icon"><i class="fas fa-brain"></i></div>
+                        <div class="key-pillar-content">
+                            <h4>Evidence-Based Practices</h4>
+                            <p>My content is rooted in scientific research and traditional mindfulness teachings. I collaborate with experienced meditation teachers, psychologists, and neuroscientists to develop effective and engaging practices that deliver tangible benefits.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="key-pillar">
+                        <div class="key-pillar-icon"><i class="fas fa-users-cog"></i></div>
+                        <div class="key-pillar-content">
+                            <h4>Fostering Community & Connection</h4>
+                            <p>I believe in the power of shared experience. MindfulSpace aims to be more than just an app; it's a community where individuals can feel supported, understood, and connected on their path to greater self-awareness and compassion.</p>
+                        </div>
+                    </div>
+                     <div class="key-pillar">
+                        <div class="key-pillar-icon"><i class="fas fa-seedling"></i></div>
+                        <div class="key-pillar-content">
+                            <h4>Continuous Growth & Innovation</h4>
+                            <p>The journey of mindfulness is ever-evolving, and so am I. I am committed to continuously improving this platform, expanding my content, and incorporating user feedback to best serve the needs of my community.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5 align-items-center">
+                <div class="col-lg-6">
+                    <h3 class="mb-3">My Vision for the Future</h3>
+                    <p>I envision a world where mindfulness is an integral part of daily life, leading to reduced stress, increased compassion, and a greater sense of global wellbeing. MindfulSpace aims to be a leading catalyst in this transformation, supporting millions in their pursuit of a more peaceful and present existence.</p>
+                    <p>Join me as I work towards making this vision a reality, one mindful moment at a time.</p>
+                     <a href="donate.html" class="btn btn-primary mt-3">Support My Mission</a>
+                </div>
+                 <div class="col-lg-6 text-center">
+                    <img src="https://images.unsplash.com/photo-1484069560501-87d72b0c3669?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=700&q=80" alt="Peaceful landscape" class="img-fluid rounded shadow-sm mt-4 mt-lg-0">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section py-5">
+        <div class="container">
+            <div class="newsletter-box rounded p-5">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h3>Join the Movement</h3>
+                        <p>Subscribe to support my mission and receive updates on my impact.</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <form class="newsletter-form" id="newsletter-form-mission">
+                            <div class="input-group">
+                                <input type="email" class="form-control" placeholder="Your email address" id="newsletter-email-mission" required>
+                                <button class="btn btn-primary" type="submit">Subscribe</button>
+                            </div>
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" id="privacy-check-mission" required>
+                                <label class="form-check-label" for="privacy-check-mission">
+                                    I agree to the privacy policy
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <img src="assets/logo-white.svg" alt="MindfulSpace" height="30" class="mb-3">
+                    <p>Helping you find peace and clarity through mindfulness meditation since 2020.</p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Explore</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="meditation.html#meditate">Meditate</a></li>
+                        <li><a href="meditation.html#sleep">Sleep</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <!-- In home.html, meditation.html footers -->
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="about.html" id="about-link-footer">About Us</a></li>
+                        <li><a href="mission.html" id="mission-link">Our Mission</a></li>
+                        <li><a href="contact.html" id="contact-link">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- In footers of all pages -->
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="help.html" id="help-link">Help Center</a></li>
+                        <li><a href="faq.html" id="faq-link">FAQ</a></li>
+                        <li><a href="donate.html" id="donate-link">Donate</a></li>
+                        <li><a href="feedback.html" id="feedback-link">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Download</h5>
+                    <div class="app-download">
+                        <a href="#" class="d-block mb-2" id="app-store-link">
+                            <img src="assets/app-store.svg" alt="App Store" class="img-fluid">
+                        </a>
+                        <a href="#" class="d-block" id="google-play-link">
+                            <img src="assets/google-play.svg" alt="Google Play" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="script.js"></script>
+     <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Specific newsletter form handler for this page
+        const newsletterFormMission = document.getElementById('newsletter-form-mission');
+        if (newsletterFormMission) {
+            newsletterFormMission.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const emailInput = document.getElementById('newsletter-email-mission');
+                const privacyCheck = document.getElementById('privacy-check-mission');
+                if (!emailInput.value || !emailInput.checkValidity()) {
+                    alert("Please enter a valid email address.");
+                    emailInput.focus();
+                    return;
+                }
+                if (!privacyCheck.checked) {
+                    alert("Please agree to the privacy policy.");
+                    privacyCheck.focus();
+                    return;
+                }
+                alert("Thank you for subscribing!");
+                this.reset();
+            });
+        }
+    </script>
+</body>
+</html>

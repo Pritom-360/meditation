@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center | MindfulSpace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .page-hero-section {
+            padding: 100px 0 60px;
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+        }
+        .page-hero-section h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .content-section {
+            padding: 60px 0;
+        }
+        .help-search-bar {
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+        .help-search-bar .form-control {
+            height: 50px;
+            border-radius: 25px 0 0 25px;
+            border-right: none;
+        }
+        .help-search-bar .btn {
+            border-radius: 0 25px 25px 0;
+            height: 50px;
+            padding: 0 25px;
+        }
+        .help-category-card {
+            background-color: var(--lighter-color);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            display: block; /* Make it a link block */
+            text-decoration: none;
+            color: var(--dark-color);
+        }
+        .help-category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .help-category-card i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .help-category-card h4 {
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        .help-category-card p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+         .help-category-card:hover h4,
+         .help-category-card:hover p,
+         .help-category-card:hover i {
+            color: white; /* Ensure text also turns white on hover */
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="loader-line-wrap" style="--i:0"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:1"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:2"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:3"><div class="loader-line"></div></div>
+                <div class="loader-line-wrap" style="--i:4"><div class="loader-line"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">
+                <img src="assets/logo.svg" alt="MindfulSpace" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="meditation.html#meditate">Meditate</a></li>
+                    <li class="nav-item"><a class="nav-link" href="meditation.html#sleep">Sleep</a></li>
+                    <li class="nav-item"><a class="nav-link" href="meditation.html#courses">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="help.html">Help</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero Section -->
+    <section class="page-hero-section">
+        <div class="container">
+            <h1 class="animate__animated animate__fadeInDown">Help Center</h1>
+            <p class="lead animate__animated animate__fadeInUp animate__delay-1s">How can I help you today?</p>
+            <form class="help-search-bar mt-4 animate__animated animate__fadeInUp animate__delay-1s" onsubmit="alert('Search functionality is a demo.'); return false;">
+                <div class="input-group">
+                    <input type="search" class="form-control" placeholder="Search for help articles..." aria-label="Search help articles">
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Browse by Category</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <a href="faq.html#getting-started" class="help-category-card">
+                        <i class="fas fa-rocket"></i>
+                        <h4>Getting Started</h4>
+                        <p>Learn how to use MindfulSpace and begin your journey.</p>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <a href="faq.html#account-management" class="help-category-card">
+                        <i class="fas fa-user-cog"></i>
+                        <h4>Account Management</h4>
+                        <p>Manage your profile, settings, and subscriptions.</p>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <a href="faq.html#meditation-player" class="help-category-card">
+                        <i class="fas fa-headphones-alt"></i>
+                        <h4>Meditation Player</h4>
+                        <p>Tips and troubleshooting for my audio player.</p>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <a href="faq.html#sleep-features" class="help-category-card">
+                        <i class="fas fa-moon"></i>
+                        <h4>Sleep Features</h4>
+                        <p>Information about sleep stories and soundscapes.</p>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <a href="faq.html#courses" class="help-category-card">
+                        <i class="fas fa-book-open"></i>
+                        <h4>Courses & Programs</h4>
+                        <p>Details about my guided mindfulness courses.</p>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <a href="faq.html#technical-issues" class="help-category-card">
+                        <i class="fas fa-tools"></i>
+                        <h4>Technical Issues</h4>
+                        <p>Solutions for common technical problems.</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <h3 class="mb-3">Can't find what you're looking for?</h3>
+                <p class="lead">My <a href="faq.html">Frequently Asked Questions</a> page might have the answer, or you can <a href="contact.html">contact me directly</a>.</p>
+                <a href="contact.html" class="btn btn-primary btn-lg rounded-pill px-4 mt-2">Contact Me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <img src="assets/logo-white.svg" alt="MindfulSpace" height="30" class="mb-3">
+                    <p>Helping you find peace and clarity through mindfulness meditation since 2020.</p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Explore</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="meditation.html#meditate">Meditate</a></li>
+                        <li><a href="meditation.html#sleep">Sleep</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <!-- In home.html, meditation.html footers -->
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="about.html" id="about-link-footer">About Us</a></li>
+                        <li><a href="mission.html" id="mission-link">Our Mission</a></li>
+                        <li><a href="contact.html" id="contact-link">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- In footers of all pages -->
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="help.html" id="help-link">Help Center</a></li>
+                        <li><a href="faq.html" id="faq-link">FAQ</a></li>
+                        <li><a href="donate.html" id="donate-link">Donate</a></li>
+                        <li><a href="feedback.html" id="feedback-link">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Download</h5>
+                    <div class="app-download">
+                        <a href="#" class="d-block mb-2" id="app-store-link">
+                            <img src="assets/app-store.svg" alt="App Store" class="img-fluid">
+                        </a>
+                        <a href="#" class="d-block" id="google-play-link">
+                            <img src="assets/google-play.svg" alt="Google Play" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

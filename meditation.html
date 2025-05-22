@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindfulSpace | Meditate & Relax</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader-inner">
+                <div class="loader-line-wrap" style="--i:0">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap" style="--i:1">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap" style="--i:2">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap" style="--i:3">
+                    <div class="loader-line"></div>
+                </div>
+                <div class="loader-line-wrap" style="--i:4">
+                    <div class="loader-line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">
+                <img src="assets/logo.svg" alt="MindfulSpace" height="30" id="logo-img">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#meditate">Meditate</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sleep">Sleep</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#courses">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero-meditation" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInUp">Your Sanctuary for Calm</h1>
+                    <p class="lead mb-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">Explore guided meditations, soothing sleep sounds, and insightful courses to find your inner peace.</p>
+                    <div class="d-flex gap-3 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                        <a href="#meditate" class="btn btn-primary btn-lg rounded-pill px-4" id="start-meditating-btn-hero">Start Meditating</a>
+                        <a href="#about" class="btn btn-outline-light btn-lg rounded-pill px-4" id="learn-about-us-btn">Learn About Me</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="woman.png" alt="Woman meditating" class="img-fluid animate__animated animate__fadeIn" style="animation-delay: 0.6s; max-height: 450px;">
+                </div>
+            </div>
+        </div>
+        <div class="wave-divider">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="currentColor"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="currentColor"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="currentColor"></path>
+            </svg>
+        </div>
+    </section>
+    
+    <!-- Meditation Player Section -->
+    <section id="meditate" class="meditation-player-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Guided Meditations</h2>
+                <p class="section-subtitle">Choose from my library of expert-led sessions</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="session-list">
+                        <div class="session-category">
+                            <h4>For Beginners</h4>
+                            <div class="session-item active"
+                                data-audio-en="assets/audio/lessons/introduction en.mp3"
+                                data-audio-bn="assets/audio/lessons/introduction bn.mp3"
+                                data-title="Introduction to Mindfulness"
+                                data-duration="5:00"
+                                data-instructor="Sarah Johnson">
+                                <div class="session-info">
+                                    <h5>Introduction to Mindfulness</h5>
+                                    <p>5 min • Sarah Johnson</p>
+                                </div>
+                                <button class="btn-play" aria-label="Play Introduction to Mindfulness"><i class="fas fa-play"></i></button>
+                            </div>
+                            <div class="session-item"
+                                data-audio-en="https://assets.mixkit.co/music/preview/mixkit-relaxing-wind-chimes-2019.mp3"
+                                data-audio-bn="https://cdn.pixabay.com/audio/2023/03/15/audio_bn_example2.mp3"
+                                data-title="Breathing Basics"
+                                data-duration="10:00"
+                                data-instructor="Michael Chen">
+                                <div class="session-info">
+                                    <h5>Breathing Basics</h5>
+                                    <p>10 min • Michael Chen</p>
+                                </div>
+                                <button class="btn-play" aria-label="Play Breathing Basics"><i class="fas fa-play"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="session-category">
+                            <h4>Stress & Anxiety</h4>
+                            <div class="session-item"
+                                data-audio-en="https://assets.mixkit.co/music/preview/mixkit-forest-stream-1383.mp3"
+                                data-audio-bn="https://cdn.pixabay.com/audio/2023/03/15/audio_bn_example3.mp3"
+                                data-title="Calming the Mind"
+                                data-duration="15:00"
+                                data-instructor="Priya Patel">
+                                <div class="session-info">
+                                    <h5>Calming the Mind</h5>
+                                    <p>15 min • Priya Patel</p>
+                                </div>
+                                <button class="btn-play" aria-label="Play Calming the Mind"><i class="fas fa-play"></i></button>
+                            </div>
+                            <div class="session-item"
+                                data-audio-en="https://assets.mixkit.co/music/preview/mixkit-soothing-wind-1251.mp3"
+                                data-audio-bn="https://cdn.pixabay.com/audio/2023/03/15/audio_bn_example4.mp3"
+                                data-title="Body Scan Relaxation"
+                                data-duration="20:00"
+                                data-instructor="David Wilson">
+                                <div class="session-info">
+                                    <h5>Body Scan Relaxation</h5>
+                                    <p>20 min • David Wilson</p>
+                                </div>
+                                <button class="btn-play" aria-label="Play Body Scan Relaxation"><i class="fas fa-play"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-8">
+                    <div class="meditation-player">
+                        <!-- Language Toggle Buttons -->
+                        <div class="d-flex justify-content-end mb-2">
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Global language toggle">
+                                <button type="button" class="btn btn-outline-primary lang-global-btn active" data-lang="en">English</button>
+                                <button type="button" class="btn btn-outline-primary lang-global-btn" data-lang="bn">Bangla</button>
+                            </div>
+                        </div>
+                        <div class="player-header">
+                            <h3 id="session-title">Introduction to Mindfulness</h3>
+                            <p id="session-details">5 min • Sarah Johnson</p>
+                        </div>
+                        
+                        <div class="player-visualization">
+                            <canvas id="visualizer"></canvas>
+                            <div class="breathing-animation">
+                                <div class="circle outer"></div>
+                                <div class="circle middle"></div>
+                                <div class="circle inner"></div>
+                                <div class="breath-instruction">Breathe In</div>
+                            </div>
+                        </div>
+                        
+                        <audio id="meditation-audio" src="https://assets.mixkit.co/music/preview/mixkit-meditative-rain-and-thunder-1258.mp3" style="display:none;"></audio>
+                        <div class="player-controls" style="display: none;">
+                            <div class="progress-container">
+                                 <div class="progress-bar-clickable-area" style="position: absolute; top: -7px; left: 0; width: 100%; height: 20px; cursor: pointer; z-index: 1;"></div>
+                                <div class="progress-bar" id="progress-bar"></div>
+                                <span class="time current-time">0:00</span>
+                                <span class="time duration">5:00</span>
+                            </div>
+                            <div class="controls">
+                                <button class="control-btn" id="rewind" aria-label="Rewind"><i class="fas fa-backward"></i></button>
+                                <button class="control-btn main-btn" id="play-pause" aria-label="Play/Pause"><i class="fas fa-play"></i></button>
+                                <button class="control-btn" id="forward" aria-label="Forward"><i class="fas fa-forward"></i></button>
+                                <div class="volume-control d-flex align-items-center">
+                                    <button class="control-btn" id="volume-btn" aria-label="Volume"><i class="fas fa-volume-up"></i></button>
+                                    <input type="range" id="volume" min="0" max="1" step="0.01" value="0.7" aria-label="Volume slider">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sleep Section -->
+    <section id="sleep" class="sleep-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Sleep, Study & Relaxation</h2>
+                <p class="section-subtitle">Experience the power of binaural beats for deep relaxation and focus</p>
+            </div>
+            
+            <div class="sleep-carousel owl-carousel owl-theme">
+                <div class="sleep-card" data-audio="assets/audio/alpha.mp3" data-title="Alpha Wave" data-duration="15:00" data-instructor="Use Headphone" data-loop="false">
+                    <img src="https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Starry Night" class="sleep-image">
+                    <div class="sleep-content">
+                        <h4>Alpha Wave</h4>
+                        <p>15 min • Please use headphone</p>
+                        <button class="btn btn-primary btn-sm sleep-play-btn">Play Wave</button>
+                    </div>
+                </div>
+                <div class="sleep-card" data-audio="assets/audio/beta.mp3" data-title="Beta Wave" data-duration="15:00" data-instructor="Use Headphone" data-loop="false">
+                    <img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Ocean Waves" class="sleep-image">
+                    <div class="sleep-content">
+                        <h4>Beta Wave</h4>
+                        <p>15 min • Please use headphone</p>
+                        <button class="btn btn-primary btn-sm sleep-play-btn">Play Wave</button>
+                    </div>
+                </div>
+                <div class="sleep-card" data-audio="assets/audio/theta.mp3" data-title="Theta Wave" data-duration=":1500" data-instructor="Use Headphone" data-loop="false">
+                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTB8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="Mountain Retreat" class="sleep-image">
+                    <div class="sleep-content">
+                        <h4>Theta Wave</h4>
+                        <p>15 min • Please use headphone</p>
+                        <button class="btn btn-primary btn-sm sleep-play-btn">Play Wave</button>
+                    </div>
+                </div>
+                <div class="sleep-card" data-audio="assets/audio/gamma.mp3" data-title="Gamma Wave" data-duration="15:00" data-instructor="Use Headphone" data-loop="false">
+                    <img src="https://images.unsplash.com/photo-1476231682828-37e571bc172f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTl8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="Rainforest" class="sleep-image">
+                    <div class="sleep-content">
+                        <h4>Gamma Wave</h4>
+                        <p>15 min • Please use headphone</p>
+                        <button class="btn btn-primary btn-sm sleep-play-btn">Play Wave</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="soundscapes mt-5">
+                <h3 class="text-center mb-4">Ambient Soundscapes</h3>
+                <div class="row">
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="sound-card" data-sound="rain">
+                            <i class="fas fa-cloud-rain"></i>
+                            <h5>Rain</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="sound-card" data-sound="wind">
+                            <i class="fas fa-wind"></i>
+                            <h5>Wind</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="sound-card" data-sound="fire">
+                            <i class="fas fa-fire"></i>
+                            <h5>Fireplace</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="sound-card" data-sound="white-noise">
+                            <i class="fas fa-feather-alt"></i>
+                            <h5>forest</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- About Section -->
+    <section id="about" class="about-section py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MjF8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="About MindfulSpace" class="img-fluid rounded">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title text-start">My Mission</h2>
+                    <p>MindfulSpace was founded in 2020 with a simple goal: to make mindfulness meditation accessible to
+                        everyone, regardless of experience level or background.</p>
+                    <p>I believe that a regular meditation practice can transform lives by reducing stress, improving
+                        focus, and fostering compassion. I work to create evidence-based content that's both effective and engaging.</p>
+                    <p>All of my content is available for free because I believe mental wellbeing shouldn't come with
+                        a price tag. I'm supported by my community of donors who share my vision.</p>
+                    <button class="btn btn-primary mt-3" id="meet-teachers-btn-meditation">Meet My Teachers</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section py-5">
+        <div class="container">
+            <div class="newsletter-box rounded p-5">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h3>Join My Community</h3>
+                        <p>Subscribe to receive weekly mindfulness tips, exclusive content, and updates from me.</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <form class="newsletter-form" id="newsletter-form-meditation">
+                            <div class="input-group">
+                                <input type="email" class="form-control" placeholder="Your email address" id="newsletter-email-meditation" required>
+                                <button class="btn btn-primary" type="submit">Subscribe</button>
+                            </div>
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" id="privacy-check-meditation" required>
+                                <label class="form-check-label" for="privacy-check-meditation">
+                                    I agree to the privacy policy
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <img src="assets/logo-white.svg" alt="MindfulSpace" height="30" class="mb-3">
+                    <p>Helping you find peace and clarity through mindfulness meditation since 2020.</p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Explore</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="meditation.html#meditate">Meditate</a></li>
+                        <li><a href="meditation.html#sleep">Sleep</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <!-- In home.html, meditation.html footers -->
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="about.html" id="about-link-footer">About Me</a></li>
+                        <li><a href="mission.html" id="mission-link">My Mission</a></li>
+                        <li><a href="contact.html" id="contact-link">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- In footers of all pages -->
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="help.html" id="help-link">Help Center</a></li>
+                        <li><a href="faq.html" id="faq-link">FAQ</a></li>
+                        <li><a href="donate.html" id="donate-link">Donate</a></li>
+                        <li><a href="feedback.html" id="feedback-link">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <h5>Download</h5>
+                    <div class="app-download">
+                        <a href="#" class="d-block mb-2" id="app-store-link">
+                            <img src="assets/app-store.svg" alt="App Store" class="img-fluid">
+                        </a>
+                        <a href="#" class="d-block" id="google-play-link">
+                            <img src="assets/google-play.svg" alt="Google Play" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Timer Modal -->
+    <div class="modal fade" id="timerModal" tabindex="-1" aria-labelledby="timerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="timerModalLabel">Set Meditation Timer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="timer-container text-center">
+                        <div class="timer-display mb-3" style="font-size:2.5rem;">
+                            <span id="timer-minutes">05</span>:<span id="timer-seconds">00</span>
+                        </div>
+                        <div class="timer-controls mb-2">
+                            <button class="btn btn-outline-secondary timer-btn" data-change="-5" aria-label="Decrease 5 minutes">-5</button>
+                            <button class="btn btn-outline-secondary timer-btn" data-change="-1" aria-label="Decrease 1 minute">-1</button>
+                            <button class="btn btn-outline-primary timer-btn" data-change="+1" aria-label="Increase 1 minute">+1</button>
+                            <button class="btn btn-outline-primary timer-btn" data-change="+5" aria-label="Increase 5 minutes">+5</button>
+                        </div>
+                        <div class="timer-presets mb-2">
+                            <button class="btn btn-sm btn-outline-secondary preset-btn" data-minutes="3">3 min</button>
+                            <button class="btn btn-sm btn-outline-secondary preset-btn" data-minutes="5">5 min</button>
+                            <button class="btn btn-sm btn-outline-secondary preset-btn" data-minutes="10">10 min</button>
+                            <button class="btn btn-sm btn-outline-secondary preset-btn" data-minutes="15">15 min</button>
+                            <button class="btn btn-sm btn-outline-secondary preset-btn" data-minutes="20">20 min</button>
+                        </div>
+                        <div class="form-check mt-3 mb-2">
+                            <input class="form-check-input" type="checkbox" id="timer-alarm-checkbox">
+                            <label class="form-check-label" for="timer-alarm-checkbox">Enable alarm notification when time is up</label>
+                        </div>
+                        <div id="timer-status" class="mt-2 text-danger" style="min-height:1.5em;"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="start-timer-modal-btn">Start Timer</button>
+                    <button type="button" class="btn btn-danger d-none" id="stop-timer-modal-btn">Stop</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Timer Button & Countdown Display -->
+    <div id="floating-timer-display" style="display:none;position:fixed;right:32px;bottom:100px;z-index:1060;font-size:1.5rem;font-weight:bold;background:#fff;padding:6px 18px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,0.12);color:#2a3b5d;text-align:center;"></div>
+    <button id="floating-timer-btn" type="button" class="btn btn-primary rounded-circle shadow" data-bs-toggle="modal" data-bs-target="#timerModal" style="position:fixed;bottom:32px;right:32px;z-index:1050;width:60px;height:60px;display:flex;align-items:center;justify-content:center;font-size:2rem;">
+        <i class="fas fa-clock"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Small script for current year in footer
+        const currentYearMeditation = document.getElementById('current-year-meditation');
+        if(currentYearMeditation) {
+            currentYearMeditation.textContent = new Date().getFullYear();
+        }
+    </script>
+
+
+
+</body>
+</html>
