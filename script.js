@@ -2,11 +2,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Preloader
     window.addEventListener('load', function() {
         const preloader = document.querySelector('.preloader');
+        console.log('[Preloader] window.load event fired');
         if (preloader) {
+            console.log('[Preloader] Found preloader element, fading out...');
             preloader.classList.add('fade-out');
             setTimeout(() => {
-                if (preloader) preloader.style.display = 'none';
+                if (preloader) {
+                    preloader.style.display = 'none';
+                    console.log('[Preloader] Preloader hidden');
+                }
             }, 500);
+        } else {
+            console.warn('[Preloader] No preloader element found!');
         }
     });
 
@@ -864,8 +871,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Audio Start Overlay Logic (for home.html)
     const audioStartOverlay = document.getElementById('audio-start-overlay');
-    const audioStartBtn = document.getElementById('audio-start-btn');
-    if (audioStartOverlay && audioStartBtn && bgMusic) { // Only if all three exist
+    // No separate audioStartBtn now; overlay is the button
+    if (audioStartOverlay && bgMusic) { // Only if both exist
         // Show overlay initially if bgMusic is supposed to autoplay but might be blocked
         if (bgMusic.hasAttribute('autoplay')) {
             setTimeout(() => { // Give browser a moment to attempt autoplay
@@ -880,10 +887,10 @@ document.addEventListener('DOMContentLoaded', function() {
             audioStartOverlay.style.display = 'none'; // No autoplay, no need for overlay
         }
 
-        // Only allow the button to trigger the overlay hide and music play
-        audioStartBtn.addEventListener('click', function(e) {
+        // Overlay click triggers music and hides overlay
+        audioStartOverlay.addEventListener('click', function(e) {
             // Set userInteracted immediately
-            if (!userInteracted) handleFirstUserInteraction({type: 'audioStartBtnClick'}); // Critical
+            if (!userInteracted) handleFirstUserInteraction({type: 'audioStartOverlayClick'}); // Critical
 
             // Try to play bgMusic, and only hide overlay after playback starts
             const playPromise = bgMusic.play();
@@ -900,15 +907,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 audioStartOverlay.style.display = 'none';
             }
         });
-
-        // Optional: If you want to allow clicking anywhere on the overlay (except the button) to also trigger the button
-        audioStartOverlay.addEventListener('click', function(e) {
-            if (e.target === audioStartOverlay) {
-                audioStartBtn.click();
-            }
-        });
     } else if (audioStartOverlay) { 
-        // If overlay exists but no bgMusic or button (e.g. on meditation.html), ensure it's hidden
+        // If overlay exists but no bgMusic (e.g. on meditation.html), ensure it's hidden
         audioStartOverlay.style.display = 'none';
     }
 });
