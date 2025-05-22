@@ -19,8 +19,9 @@
 
 <body>
     <!-- Audio Start Overlay -->
-    <div id="audio-start-overlay"
-        style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:pointer;">
+    <button id="audio-start-overlay"
+        style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:pointer;border:none;padding:0;margin:0;"
+        aria-label="Start with Breathe In & Breathe Out">
         <div style="position:relative;display:flex;align-items:center;justify-content:center;pointer-events:none;">
             <div class="glow-animate"></div>
             <div class="glow-animate glow-animate-2"></div>
@@ -28,10 +29,11 @@
             <img src="meditate.png" alt="Meditation"
                 style="max-width:min(80vw, 500px);height:auto;position:relative;z-index:2;" class="floating">
         </div>
-        <button id="audio-start-btn"
-            style="font-size:clamp(1.2rem, 4vw, 2rem);padding:1rem 2rem;border:none;background:none;color:#fff;margin-top:2rem;max-width:90vw;">Start
-            with Breathe In & Breathe Out</button>
-    </div>
+        <span id="audio-start-btn"
+            style="font-size:clamp(1.2rem, 4vw, 2rem);padding:1rem 2rem;background:none;color:#fff;margin-top:2rem;max-width:90vw;pointer-events:none;">
+            Start with Breathe In & Breathe Out
+        </span>
+    </button>
 
     <!-- Background Music (autoplay, loop) - ONLY ON HOME.HTML -->
     <audio id="bg-music" control loop autoplay>
