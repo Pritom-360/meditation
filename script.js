@@ -868,7 +868,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (audioStartOverlay && audioStartBtn && bgMusic) { // Only if all three exist
         // Show overlay initially if bgMusic is supposed to autoplay but might be blocked
         if (bgMusic.hasAttribute('autoplay')) {
-            // Check if audio is actually playing. If not, show overlay.
             setTimeout(() => { // Give browser a moment to attempt autoplay
                 if (bgMusic.paused) {
                     audioStartOverlay.style.display = 'flex';
@@ -881,7 +880,8 @@ document.addEventListener('DOMContentLoaded', function() {
             audioStartOverlay.style.display = 'none'; // No autoplay, no need for overlay
         }
 
-        audioStartBtn.addEventListener('click', function() {
+        // Only allow the button to trigger the overlay hide and music play
+        audioStartBtn.addEventListener('click', function(e) {
             // Set userInteracted immediately
             if (!userInteracted) handleFirstUserInteraction({type: 'audioStartBtnClick'}); // Critical
 
@@ -898,6 +898,13 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 // For very old browsers, just hide overlay
                 audioStartOverlay.style.display = 'none';
+            }
+        });
+
+        // Optional: If you want to allow clicking anywhere on the overlay (except the button) to also trigger the button
+        audioStartOverlay.addEventListener('click', function(e) {
+            if (e.target === audioStartOverlay) {
+                audioStartBtn.click();
             }
         });
     } else if (audioStartOverlay) { 
