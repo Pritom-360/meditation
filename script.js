@@ -891,10 +891,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 playPromise.then(() => {
                     audioStartOverlay.style.display = 'none';
                 }).catch((err) => {
-                    // Show overlay and optionally show a message if playback fails
                     audioStartOverlay.style.display = 'flex';
-                    // Optionally: alert("Unable to start background music. Please check your browser settings.");
-                    console.warn("[BG Music] Playback failed after overlay click:", err);
+                    // Optionally show a message if playback fails
+                    // alert("Unable to start background music. Please check your browser settings and allow audio playback.");
                 });
             } else {
                 // For very old browsers, just hide overlay
