@@ -165,41 +165,6 @@
                         <!-- Main Audio Element (hidden controls, controlled by popup cross) -->
                         <audio id="main-audio" src="assets/audio/guitar.mp3"></audio>
 
-                        <!-- Player controls are intentionally minimal or hidden on home.html unless a track is explicitly loaded -->
-                        <div class="player-controls" style="display: none;"> <!-- Initially hidden -->
-                            <div class="progress-container">
-                                <div class="progress-bar-clickable-area">
-                                    <div class="progress-bar" id="progress-bar"></div>
-                                </div>
-                                <span class="time current-time">0:00</span>
-                                <span class="time duration">0:00</span>
-                            </div>
-                            <div class="controls">
-                                <button class="control-btn" id="rewind" aria-label="Rewind"><i
-                                        class="fas fa-backward"></i></button>
-                                <button class="control-btn main-btn" id="play-pause" aria-label="Play/Pause"><i
-                                        class="fas fa-play"></i></button>
-                                <button class="control-btn" id="forward" aria-label="Forward"><i
-                                        class="fas fa-forward"></i></button>
-                                <div class="volume-control d-flex align-items-center">
-                                    <button class="control-btn" id="volume-btn" aria-label="Volume"><i
-                                            class="fas fa-volume-up"></i></button>
-                                    <input type="range" id="volume" min="0" max="1" step="0.01" value="0.7"
-                                        aria-label="Volume slider">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="player-actions" style="display: none;"> <!-- Initially hidden -->
-                            <button class="action-btn" id="like-btn" aria-label="Like"><i
-                                    class="far fa-heart"></i></button>
-                            <button class="action-btn" id="download-btn" aria-label="Download" disabled><i
-                                    class="fas fa-download"></i></button>
-                            <button class="action-btn" id="timer-btn" data-bs-toggle="modal"
-                                data-bs-target="#timerModal" aria-label="Set Timer"><i
-                                    class="fas fa-clock"></i></button>
-                            <button class="action-btn" id="share-btn" aria-label="Share"><i
-                                    class="fas fa-share-alt"></i></button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -239,60 +204,6 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials-section py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="section-title">What My Community Says</h2>
-                <p class="section-subtitle">Stories of transformation and growth</p>
-            </div>
-
-            <div class="testimonial-carousel owl-carousel owl-theme">
-                <div class="testimonial-item">
-                    <div class="testimonial-content">
-                        <p>"MindfulSpace has completely changed my mornings. The 5-minute meditations help me start my
-                            day with clarity and purpose."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Alex Johnson"
-                            class="author-avatar">
-                        <div class="author-info">
-                            <h5>Alex Johnson</h5>
-                            <p>Teacher, 6 months with us</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-content">
-                        <p>"As someone with anxiety, the sleep stories and breathing exercises have been life-changing.
-                            I finally sleep through the night."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Maria Garcia"
-                            class="author-avatar">
-                        <div class="author-info">
-                            <h5>Maria Garcia</h5>
-                            <p>Graphic Designer, 1 year with us</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-content">
-                        <p>"The courses structure meditation in a way that's easy to follow. I've built a consistent
-                            practice for the first time in my life."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="James Wilson"
-                            class="author-avatar">
-                        <div class="author-info">
-                            <h5>James Wilson</h5>
-                            <p>Software Engineer, 8 months with us</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- About Section -->
     <section id="about" class="about-section py-5">
