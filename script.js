@@ -878,12 +878,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         audioStartBtn.addEventListener('click', function() {
             if (!userInteracted) handleFirstUserInteraction({type: 'audioStartBtnClick'});
+            userInteracted = true; // Ensure this is set
             const playPromise = bgMusic.play();
             if (playPromise !== undefined) {
                 playPromise.then(() => {
                     audioStartOverlay.style.display = 'none';
-                }).catch(() => {
-                    audioStartOverlay.style.display = 'none';
+                }).catch((err) => {
+                    console.error("[BG Music] Play failed after overlay button:", err);
+                    audioStartOverlay.style.display = 'none'; // Hide overlay even if failed
                 });
             } else {
                 audioStartOverlay.style.display = 'none';
