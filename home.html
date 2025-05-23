@@ -19,12 +19,6 @@
 
 <body>
 
-    <!-- Background Music (autoplay, loop) - ONLY ON HOME.HTML -->
-    <audio id="bg-music" loop>
-        <source src="assets/audio/guitar.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
-    </audio>
-
     <!-- Preloader -->
     <div class="preloader">
         <div class="loader">
@@ -168,8 +162,8 @@
                             </div>
                         </div>
 
-                        <!-- Minimal Audio Element (for visualizer hook and potential future use) -->
-                        <audio id="meditation-audio" style="display:none;"></audio>
+                        <!-- Main Audio Element (hidden controls, controlled by popup cross) -->
+                        <audio id="main-audio" src="assets/audio/guitar.mp3"></audio>
 
                         <!-- Player controls are intentionally minimal or hidden on home.html unless a track is explicitly loaded -->
                         <div class="player-controls" style="display: none;"> <!-- Initially hidden -->
