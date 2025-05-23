@@ -2,18 +2,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Preloader
     window.addEventListener('load', function() {
         const preloader = document.querySelector('.preloader');
-        console.log('[Preloader] window.load event fired');
         if (preloader) {
-            console.log('[Preloader] Found preloader element, fading out...');
             preloader.classList.add('fade-out');
             setTimeout(() => {
-                if (preloader) {
-                    preloader.style.display = 'none';
-                    console.log('[Preloader] Preloader hidden');
-                }
+                if (preloader) preloader.style.display = 'none';
             }, 500);
-        } else {
-            console.warn('[Preloader] No preloader element found!');
         }
     });
 
@@ -97,11 +90,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleFirstUserInteraction(event) {
         if (userInteracted) return;
         userInteracted = true;
-        console.log(`User interaction DETECTED (Type: ${event ? event.type : 'unknown'}).`);
-
-        if (bgMusic && bgMusic.hasAttribute('autoplay') && bgMusic.paused) {
-            playBgMusic(); 
-        }
+        // Remove all listeners after first interaction
+        ['click', 'touchstart', 'keydown'].forEach(eventType => {
+            document.removeEventListener(eventType, handleFirstUserInteraction, true);
+        });
+        playBgMusic();
 
         if (window.audioContext && window.audioContext.state === 'suspended') {
             window.audioContext.resume().catch(e => console.error("Error RESUMING AudioContext:", e));
@@ -111,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Attach listeners for first user interaction
     ['click', 'touchstart', 'keydown'].forEach(eventType => {
         document.addEventListener(eventType, handleFirstUserInteraction, { once: true, capture: true });
     });
@@ -871,10 +865,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Audio Start Overlay Logic (for home.html)
     const audioStartOverlay = document.getElementById('audio-start-overlay');
-    // No separate audioStartBtn now; overlay is the button
-    if (audioStartOverlay && bgMusic) { // Only if both exist
+    const audioStartBtn = document.getElementById('audio-start-btn');
+    if (audioStartOverlay && audioStartBtn && bgMusic) { // Only if all three exist
         // Show overlay initially if bgMusic is supposed to autoplay but might be blocked
         if (bgMusic.hasAttribute('autoplay')) {
+            // Check if audio is actually playing. If not, show overlay.
             setTimeout(() => { // Give browser a moment to attempt autoplay
                 if (bgMusic.paused) {
                     audioStartOverlay.style.display = 'flex';
@@ -887,10 +882,9 @@ document.addEventListener('DOMContentLoaded', function() {
             audioStartOverlay.style.display = 'none'; // No autoplay, no need for overlay
         }
 
-        // Overlay click triggers music and hides overlay
-        audioStartOverlay.addEventListener('click', function(e) {
+        audioStartBtn.addEventListener('click', function() {
             // Set userInteracted immediately
-            if (!userInteracted) handleFirstUserInteraction({type: 'audioStartOverlayClick'}); // Critical
+            if (!userInteracted) handleFirstUserInteraction({type: 'audioStartBtnClick'}); // Critical
 
             // Try to play bgMusic, and only hide overlay after playback starts
             const playPromise = bgMusic.play();
@@ -908,7 +902,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     } else if (audioStartOverlay) { 
-        // If overlay exists but no bgMusic (e.g. on meditation.html), ensure it's hidden
+        // If overlay exists but no bgMusic or button (e.g. on meditation.html), ensure it's hidden
         audioStartOverlay.style.display = 'none';
     }
 });
