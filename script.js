@@ -880,7 +880,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // --- HOME.HTML POPUP & MAIN-AUDIO LOGIC ---
-    if (window.location.pathname.endsWith('home.html') || window.location.pathname.endsWith('/')) {
+    if (window.location.pathname.endsWith('/meditation/home.html') || window.location.pathname.endsWith('/')) {
         const popup = document.getElementById('announcement-popup');
         const closeBtn = document.getElementById('announcement-close-btn');
         const mainAudio = document.getElementById('main-audio');
