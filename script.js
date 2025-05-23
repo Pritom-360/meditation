@@ -312,11 +312,6 @@ document.addEventListener('DOMContentLoaded', function() {
         playPauseBtn.innerHTML = '<i class="fas fa-play"></i>'; // Reset button
         
         audioPlayer.load(); 
-        audioPlayer.oncanplay = function() {
-            if (!audioPlayer.paused) {
-                setupAudioContext();
-            }
-        };
         const playPromise = audioPlayer.play();
         if (playPromise !== undefined) {
             playPromise.catch(error => {
@@ -407,33 +402,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // --- SLEEP & SOUNDSCAPE AUDIO LOGIC FIXES ---
-    // Helper to stop and reset audio player
-    function stopAndResetAudioPlayer() {
-        if (audioPlayer) {
-            audioPlayer.pause();
-            audioPlayer.currentTime = 0;
-            audioPlayer.src = '';
-            if (progressBar) progressBar.style.width = '0%';
-            if (currentTimeEl) currentTimeEl.textContent = formatTime(0);
-            if (durationEl) durationEl.textContent = '0:00';
-            if (playPauseBtn) playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-            if (playerControlsDiv) playerControlsDiv.style.display = 'none';
-            if (playerActionsDiv) playerActionsDiv.style.display = 'none';
-        }
-        if (animationFrameId) { cancelAnimationFrame(animationFrameId); animationFrameId = null; }
-        isVisualizing = false;
-        if (ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height);
-        stopBreathingAnimation();
-    }
-
-    // Sleep section: play sleep audio on card button click
+    // Fix: Sleep/Relaxation audio handling for meditation.html
+    // (Ensure sleepPlayBtns and soundCards work with visualizer and player UI)
     if (sleepPlayBtns.length > 0) {
         sleepPlayBtns.forEach(btn => {
             btn.addEventListener('click', function() {
-                // Stop any previous audio and reset UI
-                stopAndResetAudioPlayer();
-
                 const card = this.closest('.sleep-card');
                 if (!card) return;
 
@@ -443,18 +416,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 const instructor = card.getAttribute('data-instructor');
                 const loop = card.getAttribute('data-loop') === 'true';
 
+                // Remove any previous .session-item.active
+                sessionItems.forEach(i => i.classList.remove('active'));
+                // Set player UI and play audio
                 loadAndPlayAudio(audioSrc, title, duration, instructor, loop);
+
+                // Show player controls and actions if hidden
+                if (playerControlsDiv) playerControlsDiv.style.display = '';
+                if (playerActionsDiv) playerActionsDiv.style.display = 'flex';
+
+                // Start visualizer if needed
+                if (userInteracted) setupAudioContext();
             });
         });
     }
 
-    // Soundscapes: play ambient sound on card click
     if (soundCards.length > 0) {
         soundCards.forEach(card => {
             card.addEventListener('click', function() {
-                // Stop any previous audio and reset UI
-                stopAndResetAudioPlayer();
-
                 const soundType = this.getAttribute('data-sound');
                 let audioSrc, title;
                 switch(soundType) {
@@ -478,78 +457,249 @@ document.addEventListener('DOMContentLoaded', function() {
                         audioSrc = 'assets/audio/music.mp3';
                         title = 'Ambient Sound';
                 }
-                loadAndPlayAudio(audioSrc, title, 'Continuous', 'Natural Sounds', true);
-            });
-        });
-    }
-
-    // Ensure only one session-item is active at a time and stop previous audio
-    if (sessionItems.length > 0) {
-        sessionItems.forEach(item => {
-            item.addEventListener('click', function(e) {
-                stopAndResetAudioPlayer();
+                // Remove any previous .session-item.active
                 sessionItems.forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
+                loadAndPlayAudio(audioSrc, title, 'Continuous', 'Natural Sounds', true);
 
-                const lang = currentGlobalLang; // Use global language
-                const audioSrc = this.getAttribute(`data-audio-${lang}`) || this.getAttribute('data-audio-en');
-                const title = this.getAttribute('data-title');
-                const duration = this.getAttribute('data-duration');
-                const instructor = this.getAttribute('data-instructor');
-
-                loadAndPlayAudio(audioSrc, title, duration, instructor, false);
+                if (playerControlsDiv) playerControlsDiv.style.display = '';
+                if (playerActionsDiv) playerActionsDiv.style.display = 'flex';
+                if (userInteracted) setupAudioContext();
             });
         });
     }
 
-    // Ensure visualizer always works for any audio loaded
-    function loadAndPlayAudio(audioSrc, title, durationStr, instructor, loop = false) {
-        if (!audioPlayer || !sessionTitle || !sessionDetails || !durationEl || !currentTimeEl || !progressBar || !playPauseBtn) {
-            console.error("Player elements missing for loadAndPlayAudio");
+    // Visualizer setup
+    window.audioContext = null; 
+    let analyser, dataArray, sourceNode, animationFrameId;
+    let isVisualizing = false;
+    const canvas = document.getElementById('visualizer');
+    let ctx;
+
+    if (canvas) {
+        ctx = canvas.getContext('2d');
+        function resizeCanvas() { 
+            if(canvas && ctx) { 
+                const playerVisualization = canvas.closest('.player-visualization');
+                if (playerVisualization) {
+                    canvas.width = playerVisualization.offsetWidth; 
+                    canvas.height = playerVisualization.offsetHeight;
+                } else {
+                    canvas.width = canvas.offsetWidth;
+                    canvas.height = canvas.offsetHeight;
+                }
+            }
+        }
+        resizeCanvas(); 
+        window.addEventListener('resize', resizeCanvas); 
+    }
+    
+    function setupAudioContext() {
+        if (!audioPlayer || !canvas || !userInteracted) return; 
+
+        if (!window.audioContext) {
+            try {
+                window.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            } catch (e) {
+                console.error("Error CREATING AudioContext:", e); return;
+            }
+        }
+
+        if (window.audioContext.state === 'suspended') {
+            window.audioContext.resume().catch(e => console.error("Error RESUMING AudioContext in setup:", e));
+        }
+
+        if (!sourceNode || sourceNode.mediaElement !== audioPlayer) {
+            if (sourceNode) { try { sourceNode.disconnect(); } catch(e){} }
+            try {
+                sourceNode = window.audioContext.createMediaElementSource(audioPlayer);
+            } catch (e) {
+                console.error("Error CREATING MediaElementSourceNode:", e);
+                isVisualizing = false; if (animationFrameId) cancelAnimationFrame(animationFrameId); return; 
+            }
+        }
+        
+        if (!analyser) {
+            analyser = window.audioContext.createAnalyser();
+            analyser.fftSize = 256; 
+        }
+        
+        try {
+            sourceNode.disconnect(analyser); // Disconnect previous if any
+            analyser.disconnect(window.audioContext.destination); // Disconnect previous if any
+        } catch(e) { /* ignore if not connected */ }
+
+        sourceNode.connect(analyser);
+        analyser.connect(window.audioContext.destination);
+        
+        dataArray = new Uint8Array(analyser.frequencyBinCount); 
+        isVisualizing = true;
+        if (animationFrameId) cancelAnimationFrame(animationFrameId); 
+        visualize();
+    }
+
+    function visualize() {
+        if (!isVisualizing || !analyser || !ctx || !canvas || !dataArray || !window.audioContext || window.audioContext.state !== 'running') {
+            if (animationFrameId) { cancelAnimationFrame(animationFrameId); animationFrameId = null; }
+            if (ctx && canvas && isVisualizing) ctx.clearRect(0, 0, canvas.width, canvas.height); 
+            isVisualizing = false; 
             return;
         }
-
-        if (!userInteracted) handleFirstUserInteraction({type: 'audioLoad'});
-
-        audioPlayer.src = audioSrc;
-        audioPlayer.loop = loop; 
         
-        sessionTitle.textContent = title;
-        sessionDetails.textContent = `${durationStr} • ${instructor}`;
-        durationEl.textContent = loop ? formatTime(Infinity) : durationStr; // Display stated duration or infinity for loops
+        animationFrameId = requestAnimationFrame(visualize);
+        analyser.getByteFrequencyData(dataArray); 
         
-        audioPlayer.currentTime = 0;
-        progressBar.style.width = '0%';
-        currentTimeEl.textContent = formatTime(0);
-        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>'; // Reset button
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const barWidth = (canvas.width / (dataArray.length * 0.8)) * 1.2;
+        let x = 0;
+        const numBars = dataArray.length * 0.8; 
         
-        audioPlayer.load(); 
-        audioPlayer.oncanplay = function() {
-            if (!audioPlayer.paused) {
-                setupAudioContext();
-            }
-        };
-        const playPromise = audioPlayer.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                console.error("[Audio Load] Autoplay FAILED:", error.name, error.message);
-                if (playPauseBtn) playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-            });
+        for (let i = 0; i < numBars; i++) {
+            const barHeight = dataArray[i] * (canvas.height / 256) * 0.8; 
+            const hue = i * (360 / numBars); 
+            ctx.fillStyle = `hsla(${hue}, 70%, 60%, 0.6)`; 
+            ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+            x += barWidth + 2; 
         }
-        if (playerControlsDiv) playerControlsDiv.style.display = '';
-        if (playerActionsDiv) playerActionsDiv.style.display = 'flex';
+    }
+    
+    // Breathing Animation
+    let breathingInterval;
+    let breathCycleState = 'in'; 
+    let breathTimer = 0;
+    const inhaleTime = 4; 
+    const exhaleTime = 4; 
 
-        const meditateSection = document.querySelector('#meditate') || document.querySelector('.meditation-player-section');
-        if (meditateSection && window.getComputedStyle(meditateSection).display !== 'none') { // Check if section is visible
-             // Scroll only if player is not already in viewport
-            const playerRect = meditateSection.getBoundingClientRect();
-            if (playerRect.bottom < 0 || playerRect.top > window.innerHeight) {
-                meditateSection.scrollIntoView({ behavior: 'smooth' });
-            }
+    function updateBreathingAnimation() {
+        if (!breathingInstruction) return;
+        const circles = document.querySelectorAll('.breathing-animation .circle');
+        if (!circles.length) return;
+
+        breathTimer++;
+        let scaleFactor, opacityFactor;
+
+        switch (breathCycleState) {
+            case 'in':
+                breathingInstruction.textContent = "Breathe In";
+                scaleFactor = 0.8 + 0.4 * (breathTimer / inhaleTime);
+                opacityFactor = 0.3 + 0.5 * (breathTimer / inhaleTime);
+                if (breathTimer >= inhaleTime) { breathCycleState = 'out'; breathTimer = 0; }
+                break;
+            case 'out':
+                breathingInstruction.textContent = "Breathe Out";
+                scaleFactor = 1.2 - 0.4 * (breathTimer / exhaleTime);
+                opacityFactor = 0.8 - 0.5 * (breathTimer / exhaleTime);
+                if (breathTimer >= exhaleTime) { breathCycleState = 'in'; breathTimer = 0; }
+                break;
+        }
+        circles.forEach(c => {
+            c.style.transform = `scale(${Math.max(0.1, Math.min(1.5, scaleFactor))})`; // Clamp values
+            c.style.opacity = `${Math.max(0, Math.min(1, opacityFactor))}`;
+        });
+    }
+
+    function startBreathingAnimation() {
+        if (!breathingInstruction || !document.querySelector('.breathing-animation')) return;
+        clearInterval(breathingInterval); 
+        breathCycleState = 'in'; 
+        breathTimer = 0;
+        updateBreathingAnimation(); 
+        breathingInterval = setInterval(updateBreathingAnimation, 1000); 
+    }
+
+    function stopBreathingAnimation() {
+        if (!breathingInstruction || !document.querySelector('.breathing-animation')) return;
+        clearInterval(breathingInterval);
+    }
+    
+    // Start breathing animation by default if on home page and no main audio playing
+    // Or if on meditation page and main audio starts (handled in audioPlayer.onplay)
+    if (breathingInstruction && document.getElementById('home') && (!document.getElementById('meditate'))) { // Only on home.html and not on meditate.html
+        if (!audioPlayer || audioPlayer.paused) {
+            startBreathingAnimation();
         }
     }
 
-    // --- TIMER MODAL LOGIC ---
+
+    // Volume Controls
+    const volumeSlider = document.getElementById('volume');
+    const volumeBtn = document.getElementById('volume-btn');
+
+    if (volumeSlider && audioPlayer && volumeBtn) {
+        audioPlayer.volume = parseFloat(volumeSlider.value);
+        volumeSlider.addEventListener('input', () => {
+            audioPlayer.volume = volumeSlider.value;
+            updateVolumeIcon(volumeSlider.value);
+        });
+        volumeBtn.addEventListener('click', () => {
+            audioPlayer.muted = !audioPlayer.muted;
+            updateVolumeIcon(audioPlayer.muted ? 0 : audioPlayer.volume);
+            volumeSlider.value = audioPlayer.muted ? 0 : audioPlayer.volume;
+        });
+        function updateVolumeIcon(volume) {
+            if (audioPlayer.muted || volume == 0) {
+                volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            } else if (volume < 0.5) {
+                volumeBtn.innerHTML = '<i class="fas fa-volume-down"></i>';
+            } else {
+                volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+            }
+        }
+        updateVolumeIcon(audioPlayer.volume);
+    }
+
+    // Rewind and Forward Buttons
+    const rewindBtn = document.getElementById('rewind');
+    const forwardBtn = document.getElementById('forward');
+
+    if (rewindBtn && audioPlayer) {
+        rewindBtn.addEventListener('click', () => {
+            audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 10);
+        });
+    }
+    if (forwardBtn && audioPlayer) {
+        forwardBtn.addEventListener('click', () => {
+            if (audioPlayer.duration && !isNaN(audioPlayer.duration) && audioPlayer.duration !== Infinity) {
+                audioPlayer.currentTime = Math.min(audioPlayer.duration, audioPlayer.currentTime + 10);
+            } else if (audioPlayer.duration === Infinity) { // For live streams or infinite loops, maybe do nothing or give feedback
+                // Potentially do nothing for infinite streams
+            }
+        });
+    }
+
+    // Stats Counter (for home.html)
+    const statNumbers = document.querySelectorAll('.stat-number');
+    if (statNumbers.length > 0 && typeof $.fn.waypoint !== 'undefined' && document.querySelector('.stats-section')) {
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) { // Ensure we are on a page with stats section
+            new Waypoint({
+                element: statsSection,
+                handler: function() {
+                    statNumbers.forEach(stat => {
+                        const countTo = parseFloat(stat.getAttribute('data-count'));
+                        const suffix = stat.getAttribute('data-suffix') || '';
+                        let current = 0;
+                        const increment = countTo / 100;
+
+                        const updateCount = () => {
+                            current += increment;
+                            if (current < countTo) {
+                                stat.textContent = (countTo % 1 !== 0 ? current.toFixed(1) : Math.ceil(current)) + suffix;
+                                requestAnimationFrame(updateCount);
+                            } else {
+                                stat.textContent = countTo + suffix;
+                            }
+                        };
+                        updateCount();
+                    });
+                    this.destroy(); 
+                },
+                offset: '80%' 
+            });
+        }
+    }
+
+
+        // --- TIMER MODAL LOGIC ---
     (function() {
         let timerInterval = null;
         let totalSeconds = 300; // default 5 min
@@ -625,7 +775,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                     // Fallback: beep
                     try {
-                        const beep = new Audio('https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae7b2.mp3');
+                        const beep = new Audio('assets/audio/bell.mp3');
                         beep.play();
                     } catch(e) {}
                 }
@@ -729,44 +879,109 @@ document.addEventListener('DOMContentLoaded', function() {
     handleNewsletterSubmit(newsletterFormMeditation, 'newsletter-email-meditation', 'privacy-check-meditation');
 
 
-    // Audio Start Overlay Logic (for home.html)
-    // REMOVE ALL CODE BELOW (audio-start-overlay and audio-start-btn logic)
-    /*
-    const audioStartOverlay = document.getElementById('audio-start-overlay');
-    const audioStartBtn = document.getElementById('audio-start-btn');
-    if (audioStartOverlay && audioStartBtn && bgMusic) { // Only if all three exist
-        // Show overlay initially if bgMusic is supposed to autoplay but might be blocked
-        if (bgMusic.hasAttribute('autoplay')) {
-             // Check if audio is actually playing. If not, show overlay.
-            setTimeout(() => { // Give browser a moment to attempt autoplay
-                if (bgMusic.paused) {
-                    audioStartOverlay.style.display = 'flex';
+    // --- HOME.HTML POPUP & BG-MUSIC VISUALIZER LOGIC ---
+    if (window.location.pathname.endsWith('home.html') || window.location.pathname.endsWith('/')) {
+        const popup = document.getElementById('announcement-popup');
+        const closeBtn = document.getElementById('announcement-close-btn');
+        const bgMusic = document.getElementById('bg-music');
+        const canvas = document.getElementById('visualizer');
+        let ctx = canvas ? canvas.getContext('2d') : null;
+        let audioContext, analyser, sourceNode, dataArray, animationFrameId;
+        let isVisualizing = false;
+
+        // Helper: Resize canvas to container
+        function resizeCanvas() {
+            if (canvas && ctx) {
+                const playerVisualization = canvas.closest('.player-visualization');
+                if (playerVisualization) {
+                    canvas.width = playerVisualization.offsetWidth;
+                    canvas.height = playerVisualization.offsetHeight;
                 } else {
-                    audioStartOverlay.style.display = 'none'; // Autoplay worked
-                    userInteracted = true; // If autoplay worked, consider it an interaction for other audio
+                    canvas.width = canvas.offsetWidth;
+                    canvas.height = canvas.offsetHeight;
                 }
-            }, 200);
-        } else {
-             audioStartOverlay.style.display = 'none'; // No autoplay, no need for overlay
+            }
         }
 
-        audioStartBtn.addEventListener('click', function() {
-            if (!userInteracted) handleFirstUserInteraction({type: 'audioStartBtnClick'}); // Critical
-            
-            const playPromise = bgMusic.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    audioStartOverlay.style.display = 'none';
-                }).catch(() => {
-                    audioStartOverlay.style.display = 'none'; 
-                });
-            } else {
-                audioStartOverlay.style.display = 'none';
+        // Visualizer logic for bg-music
+        function setupBgMusicVisualizer() {
+            if (!bgMusic || !canvas) return;
+            if (!audioContext) {
+                try {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                } catch (e) { return; }
             }
-        });
-    } else if (audioStartOverlay) { 
-        // If overlay exists but no bgMusic or button (e.g. on meditation.html), ensure it's hidden
-        audioStartOverlay.style.display = 'none';
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            if (!sourceNode || sourceNode.mediaElement !== bgMusic) {
+                if (sourceNode) { try { sourceNode.disconnect(); } catch(e){} }
+                try {
+                    sourceNode = audioContext.createMediaElementSource(bgMusic);
+                } catch (e) { return; }
+            }
+            if (!analyser) {
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 256;
+            }
+            try {
+                sourceNode.disconnect(analyser);
+                analyser.disconnect(audioContext.destination);
+            } catch(e) {}
+            sourceNode.connect(analyser);
+            analyser.connect(audioContext.destination);
+            dataArray = new Uint8Array(analyser.frequencyBinCount);
+            isVisualizing = true;
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            visualize();
+        }
+
+        function visualize() {
+            if (!isVisualizing || !analyser || !ctx || !canvas || !dataArray || !audioContext || audioContext.state !== 'running') {
+                if (animationFrameId) { cancelAnimationFrame(animationFrameId); animationFrameId = null; }
+                if (ctx && canvas && isVisualizing) ctx.clearRect(0, 0, canvas.width, canvas.height);
+                isVisualizing = false;
+                return;
+            }
+            animationFrameId = requestAnimationFrame(visualize);
+            analyser.getByteFrequencyData(dataArray);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const barWidth = (canvas.width / (dataArray.length * 0.8)) * 1.2;
+            let x = 0;
+            const numBars = dataArray.length * 0.8;
+            for (let i = 0; i < numBars; i++) {
+                const barHeight = dataArray[i] * (canvas.height / 256) * 0.8;
+                const hue = i * (360 / numBars);
+                ctx.fillStyle = `hsla(${hue}, 70%, 60%, 0.6)`;
+                ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+                x += barWidth + 2;
+            }
+        }
+
+        // Popup close logic
+        if (popup && closeBtn && bgMusic) {
+            closeBtn.onclick = function() {
+                popup.style.display = 'none';
+                // Play bg-music and start visualizer
+                bgMusic.currentTime = 0;
+                const playPromise = bgMusic.play();
+                if (playPromise) {
+                    playPromise.then(() => {
+                        resizeCanvas();
+                        setupBgMusicVisualizer();
+                    }).catch(() => {
+                        // Still try to start visualizer even if play fails (e.g. muted)
+                        resizeCanvas();
+                        setupBgMusicVisualizer();
+                    });
+                } else {
+                    resizeCanvas();
+                    setupBgMusicVisualizer();
+                }
+            };
+            // Ensure canvas resizes on window resize
+            window.addEventListener('resize', resizeCanvas);
+        }
     }
-    */
+
 });
