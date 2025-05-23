@@ -20,8 +20,7 @@
 <body>
     <!-- Audio Start Overlay -->
     <div id="audio-start-overlay"
-        style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:pointer;"
-        onclick="document.getElementById('audio-start-btn').click();">
+        style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:pointer;">
         <div style="position:relative;display:flex;align-items:center;justify-content:center;pointer-events:none;">
             <div class="glow-animate"></div>
             <div class="glow-animate glow-animate-2"></div>
@@ -34,6 +33,9 @@
             style="font-size:clamp(1.2rem, 4vw, 2rem);padding:1rem 2rem;border:none;background:none;color:#fff;margin-top:2rem;max-width:90vw;">
             Start with Breathe In & Breathe Out
         </button>
+        <div style="color:#fff;opacity:0.7;font-size:1rem;margin-top:1rem;text-align:center;">
+            <span>Click the button above to enable sound.<br>Press <kbd>Tab</kbd> then <kbd>Enter</kbd> for keyboard users.</span>
+        </div>
     </div>
 
     <!-- Background Music (loop) - ONLY ON HOME.HTML -->
