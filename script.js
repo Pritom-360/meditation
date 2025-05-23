@@ -70,7 +70,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function playBgMusic() {
         if (!bgMusic) return;
-        if (userInteracted && bgMusic.paused) {
+        if (!userInteracted) return; // Prevent play before user interaction
+        if (bgMusic.paused) {
             const promise = bgMusic.play();
             if (promise !== undefined) {
                 promise.catch(error => {
@@ -92,7 +93,8 @@ document.addEventListener('DOMContentLoaded', function() {
         userInteracted = true;
         console.log(`User interaction DETECTED (Type: ${event ? event.type : 'unknown'}).`);
 
-        if (bgMusic && bgMusic.paused) {
+        // Only play bgMusic if userInteracted is true and overlay is not visible
+        if (bgMusic && bgMusic.paused && (!audioStartOverlay || audioStartOverlay.style.display === 'none')) {
             playBgMusic(); 
         }
 
@@ -126,6 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         audioPlayer.addEventListener('pause', () => {
             setTimeout(() => { 
+                // Only play bgMusic if userInteracted is true
                 if (audioPlayer.paused && !audioPlayer.ended && userInteracted) {
                     playBgMusic();
                 }
@@ -133,9 +136,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         audioPlayer.addEventListener('ended', () => {
+            // Only play bgMusic if userInteracted is true
             if (userInteracted) {
-                playBgMusic();
-            } else {
                 playBgMusic();
             }
         });
@@ -865,8 +867,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Audio Start Overlay Logic (for home.html)
     const audioStartOverlay = document.getElementById('audio-start-overlay');
     const audioStartBtn = document.getElementById('audio-start-btn');
-    if (audioStartOverlay && audioStartBtn && bgMusic) { // Only if all three exist
-        // Always show overlay initially if bgMusic is paused
+    if (audioStartOverlay && audioStartBtn && bgMusic) {
         setTimeout(() => {
             if (bgMusic.paused) {
                 audioStartOverlay.style.display = 'flex';
@@ -876,25 +877,21 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 200);
 
-        // Prevent overlay click from triggering button click directly
         audioStartOverlay.onclick = null;
         audioStartBtn.onclick = function(e) {
             e.stopPropagation();
             if (!userInteracted) handleFirstUserInteraction({type: 'audioStartBtnClick'});
-            userInteracted = true; // Ensure this is set
+            userInteracted = true;
             const playPromise = bgMusic.play();
             if (playPromise !== undefined) {
                 playPromise.then(() => {
                     audioStartOverlay.style.display = 'none';
                 }).catch((err) => {
                     console.error("[BG Music] Play failed after overlay button:", err);
-                    audioStartOverlay.style.display = 'none'; // Hide overlay even if failed
+                    // Only hide overlay if play succeeded
                 });
-            } else {
-                audioStartOverlay.style.display = 'none';
             }
         };
-        // Only allow overlay click to focus the button, not trigger play
         audioStartOverlay.addEventListener('click', function(e) {
             if (e.target === audioStartOverlay) {
                 audioStartBtn.focus();
