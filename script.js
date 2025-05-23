@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
         userInteracted = true;
         console.log(`User interaction DETECTED (Type: ${event ? event.type : 'unknown'}).`);
 
-        if (bgMusic && bgMusic.hasAttribute('autoplay') && bgMusic.paused) {
+        if (bgMusic && bgMusic.paused) {
             playBgMusic(); 
         }
 
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener(eventType, handleFirstUserInteraction, { once: true, capture: true });
     });
 
-    if (bgMusic && bgMusic.hasAttribute('autoplay')) {
+    if (bgMusic && bgMusic.paused) {
         setTimeout(() => {
             if (bgMusic && bgMusic.paused && !userInteracted) {
                  console.warn("[BG Music] Initial Check: 'autoplay' bgMusic is PAUSED. Waiting for user interaction.");
@@ -135,8 +135,8 @@ document.addEventListener('DOMContentLoaded', function() {
         audioPlayer.addEventListener('ended', () => {
             if (userInteracted) {
                 playBgMusic();
-            } else if (bgMusic && bgMusic.hasAttribute('autoplay')) {
-                 playBgMusic();
+            } else {
+                playBgMusic();
             }
         });
     }
@@ -876,7 +876,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 200);
 
-        audioStartBtn.addEventListener('click', function() {
+        // Prevent overlay click from triggering button click directly
+        audioStartOverlay.onclick = null;
+        audioStartBtn.onclick = function(e) {
+            e.stopPropagation();
             if (!userInteracted) handleFirstUserInteraction({type: 'audioStartBtnClick'});
             userInteracted = true; // Ensure this is set
             const playPromise = bgMusic.play();
@@ -889,6 +892,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             } else {
                 audioStartOverlay.style.display = 'none';
+            }
+        };
+        // Only allow overlay click to focus the button, not trigger play
+        audioStartOverlay.addEventListener('click', function(e) {
+            if (e.target === audioStartOverlay) {
+                audioStartBtn.focus();
             }
         });
     } else if (audioStartOverlay) {
