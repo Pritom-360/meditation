@@ -763,7 +763,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (finished) {
                 if (statusEl) statusEl.textContent = 'Time is up!';
                 if (alarmEnabled) {
-                    // Try to play a sound or show a notification
+                    // --- Play bell.mp3 loudly and reliably ---
+                    playLoudBell();
+                    // Try to show a notification
                     if (window.Notification && Notification.permission === 'granted') {
                         new Notification('Meditation Timer', { body: 'Time is up!' });
                     } else if (window.Notification && Notification.permission !== 'denied') {
@@ -773,11 +775,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             }
                         });
                     }
-                    // Fallback: beep
-                    try {
-                        const beep = new Audio('assets/audio/bell.mp3');
-                        beep.play();
-                    } catch(e) {}
                 }
                 setTimeout(() => {
                     if (bsModal) bsModal.hide();
@@ -789,6 +786,38 @@ document.addEventListener('DOMContentLoaded', function() {
             // Reset timer only if finished, otherwise keep last set value
             if (finished) setTimer(totalSeconds);
         }
+
+        // --- Play bell.mp3 at max volume, allow multiple rings if needed ---
+        function playLoudBell() {
+            // Create a new Audio instance each time to avoid conflicts
+            const bell = new Audio('assets/audio/bell.mp3');
+            bell.volume = 1.0; // Max volume
+            bell.currentTime = 0;
+            // Try to play multiple times if user interaction is required
+            let played = false;
+            function tryPlay() {
+                if (played) return;
+                played = true;
+                const playPromise = bell.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                        // If autoplay fails, wait for user interaction
+                        const resume = () => {
+                            bell.play();
+                            document.removeEventListener('click', resume);
+                            document.removeEventListener('keydown', resume);
+                        };
+                        document.addEventListener('click', resume);
+                        document.addEventListener('keydown', resume);
+                    });
+                }
+            }
+            tryPlay();
+            // Optionally, ring 2 more times for emphasis
+            setTimeout(() => { bell.currentTime = 0; bell.play(); }, 700);
+            setTimeout(() => { bell.currentTime = 0; bell.play(); }, 1400);
+        }
+
         // Button events
         document.querySelectorAll('.timer-btn').forEach(btn => {
             btn.onclick = function() {
