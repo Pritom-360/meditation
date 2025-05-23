@@ -20,7 +20,7 @@
 <body>
 
     <!-- Background Music (autoplay, loop) - ONLY ON HOME.HTML -->
-    <audio id="bg-music" control loop autoplay>
+    <audio id="bg-music" loop>
         <source src="assets/audio/guitar.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
@@ -412,12 +412,12 @@
         </div>
     </footer>
     <!-- Announcement Popup -->
-    <div id="announcement-popup" style="display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:20000;background:rgba(0,0,0,0.25);">
-        <div style="background:rgba(255,255,255,0.98);box-shadow:0 4px 24px rgba(0,0,0,0.12);border-radius:18px;padding:1.5rem 2.5rem;max-width:95vw;display:flex;align-items:center;gap:1.5rem;position:relative;flex-wrap:wrap;">
-            <span style="font-size:1.1rem;color:#2E3440;flex:1 1 auto;">
-                🌱 <strong>Announcement:</strong> Welcome to MindfulSpace! Enjoy free meditations and sleep sounds. New content coming soon.
-            </span>
-            <button id="close-announcement-btn" aria-label="Close announcement" style="background:none;border:none;font-size:1.5rem;line-height:1;color:#888;position:absolute;top:12px;right:16px;cursor:pointer;">&times;</button>
+    <div id="announcement-popup" style="display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(30,40,60,0.85);z-index:9999;flex-direction:column;">
+        <div style="background:#fff;border-radius:18px;box-shadow:0 8px 32px rgba(0,0,0,0.18);padding:2rem 2.5rem;max-width:90vw;display:flex;flex-direction:column;align-items:center;position:relative;">
+            <button id="announcement-close-btn" aria-label="Close announcement" style="position:absolute;top:12px;right:12px;background:none;border:none;font-size:1.7rem;color:#888;cursor:pointer;z-index:2;">&times;</button>
+            <img src="assets/logo.svg" alt="MindfulSpace" style="height:40px;margin-bottom:1rem;">
+            <h4 style="color:#2E3440;margin-bottom:0.5rem;">Welcome to MindfulSpace!</h4>
+            <p style="color:#4C6A8C;text-align:center;max-width:350px;">Start your journey to mindfulness. Enjoy free meditations, sleep sounds, and more. Click the cross to begin and background music will start automatically.</p>
         </div>
     </div>
     <!-- Scripts -->
@@ -427,18 +427,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
     <script src="script.js"></script>
     <script>
-        // Announcement popup close logic
-        document.getElementById('close-announcement-btn').onclick = function() {
-            document.getElementById('announcement-popup').style.display = 'none';
-            // Start bg-music if available and paused
-            var bgMusic = document.getElementById('bg-music');
-            if (bgMusic && bgMusic.paused) {
-                var playPromise = bgMusic.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(function(){});
-                }
-            }
-        };
+        // Small script for current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 
 </body>
