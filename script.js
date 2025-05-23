@@ -880,7 +880,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // --- HOME.HTML POPUP & MAIN-AUDIO LOGIC ---
-    if (window.location.pathname.endsWith('/meditation/home.html') || window.location.pathname.endsWith('/')) {
+    if (window.location.pathname.endsWith('home.html') || window.location.pathname.endsWith('/')) {
         const popup = document.getElementById('announcement-popup');
         const closeBtn = document.getElementById('announcement-close-btn');
         const mainAudio = document.getElementById('main-audio');
@@ -1044,4 +1044,45 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Initialize popup (will work on both local and GitHub Pages)
+    function initializePopup() {
+        const popup = document.getElementById('announcement-popup');
+        const closeBtn = document.getElementById('announcement-close-btn');
+        const mainAudio = document.getElementById('main-audio');
+        const playerControlsDiv = document.querySelector('.player-controls');
+        const playerActionsDiv = document.querySelector('.player-actions');
+        
+        if (popup && closeBtn && mainAudio) {
+            closeBtn.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent any default button behavior
+                popup.style.display = 'none';
+                
+                // Show player controls
+                if (playerControlsDiv) playerControlsDiv.style.display = '';
+                if (playerActionsDiv) playerActionsDiv.style.display = 'flex';
+                
+                // Play audio and setup visualizer
+                if (mainAudio) {
+                    mainAudio.currentTime = 0;
+                    const playPromise = mainAudio.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            // Audio started successfully
+                            if (typeof setupVisualizer === 'function') {
+                                setupVisualizer();
+                            }
+                        }).catch(error => {
+                            console.log("Audio play failed:", error);
+                            // Still show controls even if audio fails
+                            if (playerControlsDiv) playerControlsDiv.style.display = '';
+                            if (playerActionsDiv) playerActionsDiv.style.display = 'flex';
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+    // Call initialization immediately
+    initializePopup();
 });
