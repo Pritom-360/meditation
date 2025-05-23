@@ -867,20 +867,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const audioStartOverlay = document.getElementById('audio-start-overlay');
     const audioStartBtn = document.getElementById('audio-start-btn');
     if (audioStartOverlay && audioStartBtn && bgMusic) { // Only if all three exist
-        // Show overlay initially if bgMusic is supposed to autoplay but might be blocked
-        if (bgMusic.hasAttribute('autoplay')) {
-            // Check if audio is actually playing. If not, show overlay.
-            setTimeout(() => { // Give browser a moment to attempt autoplay
-                if (bgMusic.paused) {
-                    audioStartOverlay.style.display = 'flex';
-                } else {
-                    audioStartOverlay.style.display = 'none'; // Autoplay worked
-                    userInteracted = true; // If autoplay worked, consider it an interaction for other audio
-                }
-            }, 200);
-        } else {
-            audioStartOverlay.style.display = 'none'; // No autoplay, no need for overlay
-        }
+        // Always show overlay until user interacts
+        audioStartOverlay.style.display = 'flex';
 
         audioStartBtn.addEventListener('click', function() {
             // Set userInteracted immediately
