@@ -882,14 +882,23 @@ document.addEventListener('DOMContentLoaded', function() {
         audioStartOverlay.onclick = null;
         audioStartBtn.onclick = function(e) {
             e.stopPropagation();
+            console.log("[Overlay] Start button clicked.");
+            // Hide overlay immediately for better UX
+            if (audioStartOverlay) {
+                audioStartOverlay.style.display = 'none';
+                console.log("[Overlay] Overlay hidden.");
+            } else {
+                console.warn("[Overlay] Overlay element not found.");
+            }
             if (!userInteracted) userInteracted = true;
+            // Try to play background music
             const playPromise = bgMusic.play();
             if (playPromise !== undefined) {
                 playPromise.then(() => {
-                    audioStartOverlay.style.display = 'none';
+                    console.log("[BG Music] Background music is now playing.");
                 }).catch((err) => {
                     console.error("[BG Music] Play failed after overlay button:", err);
-                    // Only hide overlay if play succeeded
+                    // Overlay is already hidden regardless of play result
                 });
             }
         };
