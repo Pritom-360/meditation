@@ -430,6 +430,14 @@
         // Announcement popup close logic
         document.getElementById('close-announcement-btn').onclick = function() {
             document.getElementById('announcement-popup').style.display = 'none';
+            // Start bg-music if available and paused
+            var bgMusic = document.getElementById('bg-music');
+            if (bgMusic && bgMusic.paused) {
+                var playPromise = bgMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(function(){});
+                }
+            }
         };
     </script>
 
