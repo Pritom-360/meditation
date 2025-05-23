@@ -90,11 +90,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleFirstUserInteraction(event) {
         if (userInteracted) return;
         userInteracted = true;
-        // Remove all listeners after first interaction
-        ['click', 'touchstart', 'keydown'].forEach(eventType => {
-            document.removeEventListener(eventType, handleFirstUserInteraction, true);
-        });
-        playBgMusic();
+        console.log(`User interaction DETECTED (Type: ${event ? event.type : 'unknown'}).`);
+
+        if (bgMusic && bgMusic.hasAttribute('autoplay') && bgMusic.paused) {
+            playBgMusic(); 
+        }
 
         if (window.audioContext && window.audioContext.state === 'suspended') {
             window.audioContext.resume().catch(e => console.error("Error RESUMING AudioContext:", e));
@@ -104,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Attach listeners for first user interaction
     ['click', 'touchstart', 'keydown'].forEach(eventType => {
         document.addEventListener(eventType, handleFirstUserInteraction, { once: true, capture: true });
     });
@@ -867,25 +866,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const audioStartOverlay = document.getElementById('audio-start-overlay');
     const audioStartBtn = document.getElementById('audio-start-btn');
     if (audioStartOverlay && audioStartBtn && bgMusic) { // Only if all three exist
-        // Always show overlay until user interacts
-        audioStartOverlay.style.display = 'flex';
+        // Show overlay initially if bgMusic is supposed to autoplay but might be blocked
+        if (bgMusic.hasAttribute('autoplay')) {
+             // Check if audio is actually playing. If not, show overlay.
+            setTimeout(() => { // Give browser a moment to attempt autoplay
+                if (bgMusic.paused) {
+                    audioStartOverlay.style.display = 'flex';
+                } else {
+                    audioStartOverlay.style.display = 'none'; // Autoplay worked
+                    userInteracted = true; // If autoplay worked, consider it an interaction for other audio
+                }
+            }, 200);
+        } else {
+             audioStartOverlay.style.display = 'none'; // No autoplay, no need for overlay
+        }
 
         audioStartBtn.addEventListener('click', function() {
-            // Set userInteracted immediately
             if (!userInteracted) handleFirstUserInteraction({type: 'audioStartBtnClick'}); // Critical
-
-            // Try to play bgMusic, and only hide overlay after playback starts
+            
             const playPromise = bgMusic.play();
             if (playPromise !== undefined) {
                 playPromise.then(() => {
                     audioStartOverlay.style.display = 'none';
-                }).catch((err) => {
-                    audioStartOverlay.style.display = 'flex';
-                    // Optionally show a message if playback fails
-                    // alert("Unable to start background music. Please check your browser settings and allow audio playback.");
+                }).catch(() => {
+                    audioStartOverlay.style.display = 'none'; 
                 });
             } else {
-                // For very old browsers, just hide overlay
                 audioStartOverlay.style.display = 'none';
             }
         });
