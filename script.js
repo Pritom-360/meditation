@@ -879,17 +879,22 @@ document.addEventListener('DOMContentLoaded', function() {
     handleNewsletterSubmit(newsletterFormMeditation, 'newsletter-email-meditation', 'privacy-check-meditation');
 
 
-    // --- HOME.HTML POPUP & BG-MUSIC VISUALIZER LOGIC ---
+    // --- HOME.HTML POPUP & MAIN-AUDIO LOGIC ---
     if (window.location.pathname.endsWith('home.html') || window.location.pathname.endsWith('/')) {
         const popup = document.getElementById('announcement-popup');
         const closeBtn = document.getElementById('announcement-close-btn');
-        const bgMusic = document.getElementById('bg-music');
+        const mainAudio = document.getElementById('main-audio');
+        const playPauseBtn = document.getElementById('play-pause');
+        const progressBar = document.getElementById('progress-bar');
+        const currentTimeEl = document.querySelector('.current-time');
+        const durationEl = document.querySelector('.duration');
+        const playerControlsDiv = document.querySelector('.player-controls');
+        const playerActionsDiv = document.querySelector('.player-actions');
         const canvas = document.getElementById('visualizer');
         let ctx = canvas ? canvas.getContext('2d') : null;
         let audioContext, analyser, sourceNode, dataArray, animationFrameId;
         let isVisualizing = false;
 
-        // Helper: Resize canvas to container
         function resizeCanvas() {
             if (canvas && ctx) {
                 const playerVisualization = canvas.closest('.player-visualization');
@@ -903,9 +908,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Visualizer logic for bg-music
-        function setupBgMusicVisualizer() {
-            if (!bgMusic || !canvas) return;
+        function setupVisualizer() {
+            if (!mainAudio || !canvas) return;
             if (!audioContext) {
                 try {
                     audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -914,10 +918,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (audioContext.state === 'suspended') {
                 audioContext.resume();
             }
-            if (!sourceNode || sourceNode.mediaElement !== bgMusic) {
+            if (!sourceNode || sourceNode.mediaElement !== mainAudio) {
                 if (sourceNode) { try { sourceNode.disconnect(); } catch(e){} }
                 try {
-                    sourceNode = audioContext.createMediaElementSource(bgMusic);
+                    sourceNode = audioContext.createMediaElementSource(mainAudio);
                 } catch (e) { return; }
             }
             if (!analyser) {
@@ -958,29 +962,85 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Popup close logic
-        if (popup && closeBtn && bgMusic) {
+        function formatTime(seconds) {
+            if (isNaN(seconds) || seconds === Infinity || typeof seconds !== 'number') return '∞';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        function updateProgress() {
+            if (!mainAudio || !progressBar || !currentTimeEl) return;
+            const { currentTime, duration } = mainAudio;
+            if (isNaN(duration) || duration === Infinity) {
+                progressBar.style.width = '0%';
+            } else {
+                const progressPercent = (currentTime / duration) * 100;
+                progressBar.style.width = `${progressPercent}%`;
+            }
+            currentTimeEl.textContent = formatTime(currentTime);
+        }
+
+        // Popup close logic: play audio, show controls, start visualizer
+        if (popup && closeBtn && mainAudio) {
             closeBtn.onclick = function() {
                 popup.style.display = 'none';
-                // Play bg-music and start visualizer
-                bgMusic.currentTime = 0;
-                const playPromise = bgMusic.play();
-                if (playPromise) {
-                    playPromise.then(() => {
-                        resizeCanvas();
-                        setupBgMusicVisualizer();
-                    }).catch(() => {
-                        // Still try to start visualizer even if play fails (e.g. muted)
-                        resizeCanvas();
-                        setupBgMusicVisualizer();
-                    });
+                mainAudio.currentTime = 0;
+                mainAudio.play();
+                if (playerControlsDiv) playerControlsDiv.style.display = '';
+                if (playerActionsDiv) playerActionsDiv.style.display = 'flex';
+                resizeCanvas();
+                setupVisualizer();
+            };
+            window.addEventListener('resize', resizeCanvas);
+        }
+
+        // Play/Pause button logic (optional: allow user to pause/resume after popup)
+        if (playPauseBtn && mainAudio) {
+            playPauseBtn.onclick = function() {
+                if (mainAudio.paused) {
+                    mainAudio.play();
                 } else {
-                    resizeCanvas();
-                    setupBgMusicVisualizer();
+                    mainAudio.pause();
                 }
             };
-            // Ensure canvas resizes on window resize
-            window.addEventListener('resize', resizeCanvas);
+            mainAudio.addEventListener('play', function() {
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                setupVisualizer();
+            });
+            mainAudio.addEventListener('pause', function() {
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                if (animationFrameId) { cancelAnimationFrame(animationFrameId); animationFrameId = null; }
+                isVisualizing = false;
+                if(ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height);
+            });
+        }
+
+        // Progress bar and time update
+        if (mainAudio) {
+            mainAudio.addEventListener('timeupdate', updateProgress);
+            mainAudio.addEventListener('loadedmetadata', function() {
+                if (durationEl) durationEl.textContent = formatTime(mainAudio.duration);
+                updateProgress();
+            });
+            mainAudio.addEventListener('ended', function() {
+                if (progressBar) progressBar.style.width = '0%';
+                if (currentTimeEl) currentTimeEl.textContent = formatTime(0);
+            });
+        }
+
+        // Progress bar click to seek
+        const progressBarContainer = document.querySelector('.progress-container');
+        const progressBarClickTarget = document.querySelector('.progress-bar-clickable-area') || progressBarContainer;
+        if (progressBarClickTarget && mainAudio) {
+            progressBarClickTarget.addEventListener('click', (e) => {
+                if (!mainAudio.duration || isNaN(mainAudio.duration) || mainAudio.duration === Infinity) return;
+                const rect = progressBarClickTarget.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const width = progressBarClickTarget.clientWidth;
+                const duration = mainAudio.duration;
+                mainAudio.currentTime = (clickX / width) * duration;
+            });
         }
     }
 
