@@ -29,21 +29,15 @@
             <img src="meditate.png" alt="Meditation"
                 style="max-width:min(80vw, 500px);height:auto;position:relative;z-index:2;" class="floating">
         </div>
-        <!-- Instructional message for users -->
-        <div style="color:#fff;margin-top:1.5rem;font-size:1.1em;text-align:center;max-width:90vw;">
-            <span>
-                <strong>Click anywhere</strong> on this overlay (image or button) to start background music.<br>
-                This is required by your browser to enable audio playback.
-            </span>
-        </div>
+        <!-- Remove pointer-events: none; so the button is clickable for autoplay policies on GitHub Pages -->
         <button id="audio-start-btn"
             style="font-size:clamp(1.2rem, 4vw, 2rem);padding:1rem 2rem;border:none;background:none;color:#fff;margin-top:2rem;max-width:90vw;">
             Start with Breathe In & Breathe Out
         </button>
     </div>
 
-    <!-- Background Music (autoplay, loop) - ONLY ON HOME.HTML -->
-    <audio id="bg-music" autoplay loop>
+    <!-- Background Music (loop) - ONLY ON HOME.HTML -->
+    <audio id="bg-music" loop>
         <source src="assets/audio/guitar.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
