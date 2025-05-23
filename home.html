@@ -1,430 +1,1048 @@
-<!DOCTYPE html>
-<html lang="en">
+document.addEventListener('DOMContentLoaded', function() {
+    // Preloader
+    window.addEventListener('load', function() {
+        const preloader = document.querySelector('.preloader');
+        if (preloader) {
+            preloader.classList.add('fade-out');
+            setTimeout(() => {
+                if (preloader) preloader.style.display = 'none';
+            }, 500);
+        }
+    });
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MindfulSpace | Meditate & Relax</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    <link rel="stylesheet" href="styles.css">
-</head>
+    // Navbar scroll effect
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    }
 
-<body>
-
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="loader">
-            <div class="loader-inner">
-                <div class="loader-line-wrap" style="--i:0">
-                    <div class="loader-line"></div>
-                </div>
-                <div class="loader-line-wrap" style="--i:1">
-                    <div class="loader-line"></div>
-                </div>
-                <div class="loader-line-wrap" style="--i:2">
-                    <div class="loader-line"></div>
-                </div>
-                <div class="loader-line-wrap" style="--i:3">
-                    <div class="loader-line"></div>
-                </div>
-                <div class="loader-line-wrap" style="--i:4">
-                    <div class="loader-line"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#home">
-                <img src="assets/logo.svg" alt="MindfulSpace" height="30" id="logo-img">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="meditation.html#meditate">Meditate</a></li>
-                    <li class="nav-item"><a class="nav-link" href="meditation.html#sleep">Sleep</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#courses">Courses</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInUp">Find Peace in Every Breath
-                    </h1>
-                    <p class="lead mb-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">MindfulSpace
-                        helps you build a meditation habit with guided sessions, sleep stories, and mindfulness courses.
-                    </p>
-
-                    <div class="d-flex gap-3 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
-                        <a href="meditation.html" class="btn btn-primary btn-lg rounded-pill px-4"
-                            id="start-meditating-btn">Start Meditating</a>
-                        <a href="#benefits" class="btn btn-outline-light btn-lg rounded-pill px-4" id="tour-btn">Learn
-                            More</a>
-                    </div>
-                </div>
-                <div class="col-lg-6 text-center">
-                    <img src="woman.png" alt="Woman meditating" class="img-fluid animate__animated animate__fadeIn"
-                        style="animation-delay: 0.6s; max-height: 450px;">
-                </div>
-            </div>
-        </div>
-        <div class="wave-divider">
-            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path
-                    d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
-                    opacity=".25" fill="currentColor"></path>
-                <path
-                    d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
-                    opacity=".5" fill="currentColor"></path>
-                <path
-                    d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
-                    fill="currentColor"></path>
-            </svg>
-        </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section id="benefits" class="benefits-section py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="section-title">Why Meditate Daily?</h2>
-                <p class="section-subtitle">Science-backed benefits of a regular practice</p>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <i class="fas fa-heartbeat"></i>
-                        </div>
-                        <h3>Reduces Stress</h3>
-                        <p>Lower cortisol levels and decrease inflammation in the body with regular practice.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <h3>Improves Focus</h3>
-                        <p>Enhance your attention span and concentration through mindfulness techniques.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <i class="fas fa-moon"></i>
-                        </div>
-                        <h3>Better Sleep</h3>
-                        <p>Quiet your mind and prepare your body for deeper, more restful sleep.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Meditation Player Section (Visuals and Breathing Animation) -->
-    <section class="meditation-player-section py-5 bg-light">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="meditation-player">
-                        <div class="player-header text-center">
-                            <h3 id="session-title">Mindful Breathing Exercise</h3>
-                            <p id="session-details">Focus on your breath</p>
-                        </div>
-
-                        <div class="player-visualization">
-                            <canvas id="visualizer"></canvas>
-                            <div class="breathing-animation">
-                                <div class="circle outer"></div>
-                                <div class="circle middle"></div>
-                                <div class="circle inner"></div>
-                                <div class="breath-instruction">Breathe In</div>
-                            </div>
-                        </div>
-
-                        <!-- Main Audio Element (hidden controls, controlled by popup cross) -->
-                        <audio id="main-audio" src="assets/audio/guitar.mp3"></audio>
-
-                        <!-- Player controls are intentionally minimal or hidden on home.html unless a track is explicitly loaded -->
-                        <div class="player-controls" style="display: none;"> <!-- Initially hidden -->
-                            <div class="progress-container">
-                                <div class="progress-bar-clickable-area">
-                                    <div class="progress-bar" id="progress-bar"></div>
-                                </div>
-                                <span class="time current-time">0:00</span>
-                                <span class="time duration">0:00</span>
-                            </div>
-                            <div class="controls">
-                                <button class="control-btn" id="rewind" aria-label="Rewind"><i
-                                        class="fas fa-backward"></i></button>
-                                <button class="control-btn main-btn" id="play-pause" aria-label="Play/Pause"><i
-                                        class="fas fa-play"></i></button>
-                                <button class="control-btn" id="forward" aria-label="Forward"><i
-                                        class="fas fa-forward"></i></button>
-                                <div class="volume-control d-flex align-items-center">
-                                    <button class="control-btn" id="volume-btn" aria-label="Volume"><i
-                                            class="fas fa-volume-up"></i></button>
-                                    <input type="range" id="volume" min="0" max="1" step="0.01" value="0.7"
-                                        aria-label="Volume slider">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="player-actions" style="display: none;"> <!-- Initially hidden -->
-                            <button class="action-btn" id="like-btn" aria-label="Like"><i
-                                    class="far fa-heart"></i></button>
-                            <button class="action-btn" id="download-btn" aria-label="Download" disabled><i
-                                    class="fas fa-download"></i></button>
-                            <button class="action-btn" id="timer-btn" data-bs-toggle="modal"
-                                data-bs-target="#timerModal" aria-label="Set Timer"><i
-                                    class="fas fa-clock"></i></button>
-                            <button class="action-btn" id="share-btn" aria-label="Share"><i
-                                    class="fas fa-share-alt"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href.startsWith('#') && href.length > 1 && document.getElementById(href.substring(1))) {
+                e.preventDefault();
+                const targetId = href; // href includes '#'
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const offset = navbar ? navbar.offsetHeight : 70;
+                    window.scrollTo({ top: targetElement.offsetTop - offset, behavior: 'smooth' });
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                        navbarCollapse.classList.remove('show');
+                    }
+                }
+            }
+            // Allow default behavior for links to other pages (e.g., home.html, meditation.html#meditate)
+        });
+    });
 
 
-    <!-- Stats Section -->
-    <section class="stats-section py-5">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-md-3 col-6">
-                    <div class="stat-item">
-                        <h3 class="stat-number" data-count="500">0</h3>
-                        <p class="stat-label">Meditations</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="stat-item">
-                        <h3 class="stat-number" data-count="50">0</h3>
-                        <p class="stat-label">Teachers</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="stat-item">
-                        <h3 class="stat-number" data-count="1.2" data-suffix="M">0</h3>
-                        <p class="stat-label">Users</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="stat-item">
-                        <h3 class="stat-number" data-count="100">0</h3>
-                        <p class="stat-label">Countries</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    // Owl Carousels
+    if (typeof $ !== 'undefined' && $.fn.owlCarousel) {
+        const sleepCarousel = $('.sleep-carousel');
+        if (sleepCarousel.length) {
+            sleepCarousel.owlCarousel({
+                loop: true, margin: 20, nav: true, dots: true, center: false,
+                responsive: { 0: { items: 1 }, 576: {items: 2}, 768: { items: 2 }, 992: { items: 3 } }
+            });
+        }
+        const testimonialCarousel = $('.testimonial-carousel'); // On home.html
+        if (testimonialCarousel.length) {
+            testimonialCarousel.owlCarousel({
+                loop: true, margin: 30, nav: false, dots: true,
+                responsive: { 0: { items: 1 }, 768: { items: 2 } }
+            });
+        }
+    }
 
-    <!-- Testimonials Section -->
-    <section class="testimonials-section py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="section-title">What My Community Says</h2>
-                <p class="section-subtitle">Stories of transformation and growth</p>
-            </div>
+    // --- AUDIO LOGIC ---
+    const audioPlayer = document.getElementById('meditation-audio'); // Main content player
+    const bgMusic = document.getElementById('bg-music');      // Background music (home.html only)
+    
+    let userInteracted = false; // Global flag for user interaction
 
-            <div class="testimonial-carousel owl-carousel owl-theme">
-                <div class="testimonial-item">
-                    <div class="testimonial-content">
-                        <p>"MindfulSpace has completely changed my mornings. The 5-minute meditations help me start my
-                            day with clarity and purpose."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Alex Johnson"
-                            class="author-avatar">
-                        <div class="author-info">
-                            <h5>Alex Johnson</h5>
-                            <p>Teacher, 6 months with us</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-content">
-                        <p>"As someone with anxiety, the sleep stories and breathing exercises have been life-changing.
-                            I finally sleep through the night."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Maria Garcia"
-                            class="author-avatar">
-                        <div class="author-info">
-                            <h5>Maria Garcia</h5>
-                            <p>Graphic Designer, 1 year with us</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-content">
-                        <p>"The courses structure meditation in a way that's easy to follow. I've built a consistent
-                            practice for the first time in my life."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="James Wilson"
-                            class="author-avatar">
-                        <div class="author-info">
-                            <h5>James Wilson</h5>
-                            <p>Software Engineer, 8 months with us</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    function playBgMusic() {
+        if (!bgMusic) return;
+        if (userInteracted && bgMusic.paused) {
+            const promise = bgMusic.play();
+            if (promise !== undefined) {
+                promise.catch(error => {
+                    console.error("[BG Music] Playback FAILED:", error.name, error.message);
+                });
+            }
+        }
+    }
 
-    <!-- About Section -->
-    <section id="about" class="about-section py-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MjF8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
-                        alt="About MindfulSpace" class="img-fluid rounded">
-                </div>
-                <div class="col-lg-6">
-                    <h2 class="section-title text-start">My Mission</h2>
-                    <p>MindfulSpace was founded in 2020 with a simple goal: to make mindfulness meditation accessible to
-                        everyone, regardless of experience level or background.</p>
-                    <p>I believe that a regular meditation practice can transform lives by reducing stress, improving
-                        focus, and fostering compassion. I work with meditation teachers, neuroscientists, and
-                        developers to create evidence-based content that's both effective and engaging.
-                        </p>
-                    <p>All of my content is available for free because I believe mental wellbeing shouldn't come with
-                        a price tag. I'm supported by my community of donors who share my vision.</p>
-                    <button class="btn btn-primary mt-3" id="meet-teachers-btn">Meet My Teachers</button>
-                </div>
-            </div>
-        </div>
-    </section>
+    function pauseBgMusic() {
+        if (!bgMusic) return;
+        if (!bgMusic.paused) {
+            bgMusic.pause();
+        }
+    }
 
-    <!-- Newsletter Section -->
-    <section class="newsletter-section py-5">
-        <div class="container">
-            <div class="newsletter-box rounded p-5">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <h3>Join My Community</h3>
-                        <p>Subscribe to receive weekly mindfulness tips, exclusive content, and updates from me.</p>
-                    </div>
-                    <div class="col-lg-6">
-                        <form class="newsletter-form" id="newsletter-form">
-                            <div class="input-group">
-                                <input type="email" class="form-control" placeholder="Your email address"
-                                    id="newsletter-email" required>
-                                <button class="btn btn-primary" type="submit">Subscribe</button>
-                            </div>
-                            <div class="form-check mt-2">
-                                <input class="form-check-input" type="checkbox" value="" id="privacy-check" required>
-                                <label class="form-check-label" for="privacy-check">
-                                    I agree to the privacy policy
-                                </label>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    function handleFirstUserInteraction(event) {
+        if (userInteracted) return;
+        userInteracted = true;
+        console.log(`User interaction DETECTED (Type: ${event ? event.type : 'unknown'}).`);
 
-    <!-- Footer -->
-    <footer class="footer py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <img src="assets/logo-white.svg" alt="MindfulSpace" height="30" class="mb-3">
-                    <p>Helping you find peace and clarity through mindfulness meditation since 2020.</p>
-                    <div class="social-links mt-3">
-                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="social-link" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-6 mb-4">
-                    <h5>Explore</h5>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="meditation.html#meditate">Meditate</a></li>
-                        <li><a href="meditation.html#sleep">Sleep</a></li>
-                        <li><a href="#courses">Courses</a></li>
-                        <li><a href="#about">About</a></li>
-                    </ul>
-                </div>
-                <!-- In home.html, meditation.html footers -->
-                <div class="col-lg-2 col-md-4 col-6 mb-4">
-                    <h5>Company</h5>
-                    <ul class="footer-links">
-                        <li><a href="about.html" id="about-link-footer">About Me</a></li>
-                        <li><a href="mission.html" id="mission-link">My Mission</a></li>
-                        <li><a href="contact.html" id="contact-link">Contact</a></li>
-                    </ul>
-                </div>
-                <!-- In footers of all pages -->
-                <div class="col-lg-2 col-md-4 col-6 mb-4">
-                    <h5>Support</h5>
-                    <ul class="footer-links">
-                        <li><a href="help.html" id="help-link">Help Center</a></li>
-                        <li><a href="faq.html" id="faq-link">FAQ</a></li>
-                        <li><a href="donate.html" id="donate-link">Donate</a></li>
-                        <li><a href="feedback.html" id="feedback-link">Feedback</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-4 col-6 mb-4">
-                    <h5>Download</h5>
-                    <div class="app-download">
-                        <a href="#" class="d-block mb-2" id="app-store-link">
-                            <img src="assets/app-store.svg" alt="App Store" class="img-fluid">
-                        </a>
-                        <a href="#" class="d-block" id="google-play-link">
-                            <img src="assets/google-play.svg" alt="Google Play" class="img-fluid">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Announcement Popup -->
-    <div id="announcement-popup" style="display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(30,40,60,0.85);z-index:9999;flex-direction:column;">
-        <div style="background:#fff;border-radius:18px;box-shadow:0 8px 32px rgba(0,0,0,0.18);padding:2rem 2.5rem;max-width:90vw;display:flex;flex-direction:column;align-items:center;position:relative;">
-            <button id="announcement-close-btn" aria-label="Close announcement" style="position:absolute;top:12px;right:12px;background:none;border:none;font-size:1.7rem;color:#888;cursor:pointer;z-index:2;">&times;</button>
-            <img src="assets/logo.svg" alt="MindfulSpace" style="height:40px;margin-bottom:1rem;">
-            <h4 style="color:#2E3440;margin-bottom:0.5rem;">Welcome to MindfulSpace!</h4>
-            <p style="color:#4C6A8C;text-align:center;max-width:350px;">Start your journey to mindfulness. Enjoy free meditations, sleep sounds, and more. Click the cross to begin and background music will start automatically.</p>
-        </div>
-    </div>
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="script.js"></script>
-    <script>
-        // Small script for current year in footer
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-    </script>
+        if (bgMusic && bgMusic.hasAttribute('autoplay') && bgMusic.paused) {
+            playBgMusic(); 
+        }
 
-</body>
+        if (window.audioContext && window.audioContext.state === 'suspended') {
+            window.audioContext.resume().catch(e => console.error("Error RESUMING AudioContext:", e));
+        }
+        if (audioPlayer && !audioPlayer.paused && !isVisualizing) {
+            setupAudioContext();
+        }
+    }
 
-</html>
+    ['click', 'touchstart', 'keydown'].forEach(eventType => {
+        document.addEventListener(eventType, handleFirstUserInteraction, { once: true, capture: true });
+    });
+
+    if (bgMusic && bgMusic.hasAttribute('autoplay')) {
+        setTimeout(() => {
+            if (bgMusic && bgMusic.paused && !userInteracted) {
+                 console.warn("[BG Music] Initial Check: 'autoplay' bgMusic is PAUSED. Waiting for user interaction.");
+            }
+        }, 500);
+    }
+
+    if (audioPlayer) {
+        audioPlayer.addEventListener('play', () => {
+            pauseBgMusic();
+            if (document.getElementById('home') && !document.getElementById('meditate')) { // Only home page default breathing
+                stopBreathingAnimation(); 
+            }
+        });
+
+        audioPlayer.addEventListener('pause', () => {
+            setTimeout(() => { 
+                if (audioPlayer.paused && !audioPlayer.ended && userInteracted) {
+                    playBgMusic();
+                }
+            }, 50);
+        });
+
+        audioPlayer.addEventListener('ended', () => {
+            if (userInteracted) {
+                playBgMusic();
+            } else if (bgMusic && bgMusic.hasAttribute('autoplay')) {
+                 playBgMusic();
+            }
+        });
+    }
+    // --- END OF CORE AUDIO LOGIC FOR BACKGROUND MUSIC ---
+
+    // Meditation Player Functionality
+    const playPauseBtn = document.getElementById('play-pause');
+    const progressBar = document.getElementById('progress-bar');
+    const progressBarContainer = document.querySelector('.progress-container'); // For clickable area
+    const currentTimeEl = document.querySelector('.current-time');
+    const durationEl = document.querySelector('.duration');
+    const sessionTitle = document.getElementById('session-title');
+    const sessionDetails = document.getElementById('session-details');
+    const sessionItems = document.querySelectorAll('.session-item');
+    const soundCards = document.querySelectorAll('.sound-card');
+    const sleepPlayBtns = document.querySelectorAll('.sleep-play-btn');
+    const breathingInstruction = document.querySelector('.breath-instruction');
+    const playerControlsDiv = document.querySelector('.player-controls');
+    const playerActionsDiv = document.querySelector('.player-actions');
+
+
+    function formatTime(seconds) {
+        if (isNaN(seconds) || seconds === Infinity || typeof seconds !== 'number') return '∞';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+
+    function updateProgress() {
+        if (!audioPlayer || !progressBar || !currentTimeEl) return;
+        const { currentTime, duration } = audioPlayer;
+        if (isNaN(duration) || duration === Infinity) {
+            if (progressBar) progressBar.style.width = '0%'; 
+        } else {
+           if (progressBar) {
+                const progressPercent = (currentTime / duration) * 100;
+                progressBar.style.width = `${progressPercent}%`;
+           }
+        }
+        if (currentTimeEl) currentTimeEl.textContent = formatTime(currentTime);
+    }
+    
+    // Use progressBarContainer for click events if available, fallback to specific clickable area div
+    const progressBarClickTarget = document.querySelector('.progress-bar-clickable-area') || progressBarContainer;
+    if (progressBarClickTarget && audioPlayer) {
+        progressBarClickTarget.addEventListener('click', (e) => {
+            if (!audioPlayer.duration || isNaN(audioPlayer.duration) || audioPlayer.duration === Infinity) return;
+            const rect = progressBarClickTarget.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const width = progressBarClickTarget.clientWidth;
+            const duration = audioPlayer.duration;
+            audioPlayer.currentTime = (clickX / width) * duration;
+        });
+    }
+    
+
+    if (playPauseBtn && audioPlayer) {
+        playPauseBtn.addEventListener('click', () => {
+            if (!userInteracted) handleFirstUserInteraction({type: 'playPauseBtnClick'});
+
+            if (audioPlayer.paused) {
+                if (!audioPlayer.src && !audioPlayer.currentSrc) {
+                    const firstSessionItem = document.querySelector('.session-item.active[data-audio]') || document.querySelector('.session-item[data-audio]');
+                    if (firstSessionItem) {
+                        firstSessionItem.click(); 
+                        audioPlayer.addEventListener('canplay', () => {
+                            if (audioPlayer.paused) {
+                                audioPlayer.play().catch(e => console.error("Error playing after loading first item:", e));
+                            }
+                        }, { once: true });
+                        return;
+                    }
+                    // alert("Please select a meditation track first."); // Muted for less interruption
+                    console.warn("Play clicked, but no track selected and no default found.");
+                    return;
+                }
+
+                if (audioPlayer.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA || audioPlayer.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+                     audioPlayer.play().catch(error => {
+                        console.error("[Main Player] Playback FAILED:", error.name, error.message);
+                        if (playPauseBtn) playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    });
+                } else {
+                    audioPlayer.load(); // Ensure it tries to load if not ready
+                    const playWhenReady = () => {
+                        audioPlayer.play().catch(error => {
+                            console.error("[Main Player] Playback FAILED after 'canplay':", error.name, error.message);
+                            if (playPauseBtn) playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                        });
+                    };
+                    audioPlayer.addEventListener('canplaythrough', playWhenReady, { once: true });
+                    audioPlayer.addEventListener('error', (e) => {
+                         handleAudioPlayerError(e);
+                         audioPlayer.removeEventListener('canplaythrough', playWhenReady);
+                    }, { once: true });
+                }
+            } else { 
+                audioPlayer.pause();
+            }
+        });
+    }
+    
+    function handleAudioPlayerError(e) {
+        console.error("[Main Player] Error event on audioPlayer:", e);
+        if (audioPlayer && audioPlayer.error) {
+            console.error("Error details:", audioPlayer.error.message, "Code:", audioPlayer.error.code);
+        }
+        if (playPauseBtn) playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        stopBreathingAnimation(); 
+    }
+
+    if (audioPlayer && durationEl) {
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            if (durationEl) durationEl.textContent = formatTime(audioPlayer.duration);
+            updateProgress(); 
+            if (playerControlsDiv && (audioPlayer.src || audioPlayer.currentSrc) ) playerControlsDiv.style.display = '';
+            if (playerActionsDiv && (audioPlayer.src || audioPlayer.currentSrc) ) playerActionsDiv.style.display = 'flex';
+        });
+    }
+
+    if (audioPlayer) {
+        audioPlayer.addEventListener('timeupdate', updateProgress);
+        audioPlayer.addEventListener('play', () => {
+            if (playPauseBtn) playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            // Start breathing animation only if on a page with meditation player and not home page's default
+            if (document.getElementById('meditate')) { 
+                 startBreathingAnimation();
+            }
+            if (userInteracted) setupAudioContext(); 
+        });
+        audioPlayer.addEventListener('pause', () => { 
+            if (playPauseBtn) playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            if (document.getElementById('meditate')) {
+                stopBreathingAnimation();
+            }
+            if (animationFrameId) { cancelAnimationFrame(animationFrameId); animationFrameId = null; }
+            isVisualizing = false; 
+            if(ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+        audioPlayer.addEventListener('ended', () => {
+            if (progressBar) progressBar.style.width = '0%';
+            if (currentTimeEl) currentTimeEl.textContent = formatTime(0);
+        });
+        audioPlayer.addEventListener('error', handleAudioPlayerError);
+
+        if ((audioPlayer.src || audioPlayer.currentSrc) && document.getElementById('meditate')) {
+            if (playerControlsDiv) playerControlsDiv.style.display = '';
+            if (playerActionsDiv) playerActionsDiv.style.display = 'flex';
+        } else if (!document.getElementById('meditate')) { // e.g. home.html
+            if (playerControlsDiv) playerControlsDiv.style.display = 'none';
+            if (playerActionsDiv) playerActionsDiv.style.display = 'none';
+        }
+    }
+
+    function loadAndPlayAudio(audioSrc, title, durationStr, instructor, loop = false) {
+        if (!audioPlayer || !sessionTitle || !sessionDetails || !durationEl || !currentTimeEl || !progressBar || !playPauseBtn) {
+            console.error("Player elements missing for loadAndPlayAudio");
+            return;
+        }
+
+        if (!userInteracted) handleFirstUserInteraction({type: 'audioLoad'});
+
+        audioPlayer.src = audioSrc;
+        audioPlayer.loop = loop; 
+        
+        sessionTitle.textContent = title;
+        sessionDetails.textContent = `${durationStr} • ${instructor}`;
+        durationEl.textContent = loop ? formatTime(Infinity) : durationStr; // Display stated duration or infinity for loops
+        
+        audioPlayer.currentTime = 0;
+        progressBar.style.width = '0%';
+        currentTimeEl.textContent = formatTime(0);
+        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>'; // Reset button
+        
+        audioPlayer.load(); 
+        const playPromise = audioPlayer.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.error("[Audio Load] Autoplay FAILED:", error.name, error.message);
+                if (playPauseBtn) playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            });
+        }
+        if (playerControlsDiv) playerControlsDiv.style.display = '';
+        if (playerActionsDiv) playerActionsDiv.style.display = 'flex';
+
+        const meditateSection = document.querySelector('#meditate') || document.querySelector('.meditation-player-section');
+        if (meditateSection && window.getComputedStyle(meditateSection).display !== 'none') { // Check if section is visible
+             // Scroll only if player is not already in viewport
+            const playerRect = meditateSection.getBoundingClientRect();
+            if (playerRect.bottom < 0 || playerRect.top > window.innerHeight) {
+                meditateSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }
+
+    // --- GLOBAL LANGUAGE TOGGLE LOGIC ---
+    const globalLangBtns = document.querySelectorAll('.lang-global-btn');
+    let currentGlobalLang = 'en';
+
+    function setGlobalLanguage(lang) {
+        currentGlobalLang = lang;
+        // Update global toggle UI
+        globalLangBtns.forEach(btn => {
+            if (btn.dataset.lang === lang) btn.classList.add('active');
+            else btn.classList.remove('active');
+        });
+        // If a session is active, reload its audio in new language
+        const activeSession = document.querySelector('.session-item.active');
+        if (activeSession) {
+            const audioSrc = activeSession.getAttribute(`data-audio-${lang}`) || activeSession.getAttribute('data-audio-en');
+            const title = activeSession.getAttribute('data-title');
+            const duration = activeSession.getAttribute('data-duration');
+            const instructor = activeSession.getAttribute('data-instructor');
+            loadAndPlayAudio(audioSrc, title, duration, instructor, false);
+        }
+    }
+
+    if (globalLangBtns.length) {
+        globalLangBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                setGlobalLanguage(this.dataset.lang);
+            });
+        });
+    }
+
+    // --- SESSION ITEM LOGIC (NO PER-SESSION LANGUAGE BUTTONS) ---
+    if (sessionItems.length > 0) {
+        sessionItems.forEach(item => {
+            // Session item click (play)
+            item.addEventListener('click', function(e) {
+                sessionItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+
+                const lang = currentGlobalLang; // Use global language
+                const audioSrc = this.getAttribute(`data-audio-${lang}`) || this.getAttribute('data-audio-en');
+                const title = this.getAttribute('data-title');
+                const duration = this.getAttribute('data-duration');
+                const instructor = this.getAttribute('data-instructor');
+
+                loadAndPlayAudio(audioSrc, title, duration, instructor, false);
+            });
+        });
+
+        // On page load, set player UI to the active session and selected language
+        if (document.getElementById('meditate')) {
+            const activeSession = document.querySelector('.session-item.active');
+            if (activeSession && (!audioPlayer.src || !audioPlayer.currentSrc)) {
+                // Use global language
+                const lang = currentGlobalLang;
+                const title = activeSession.getAttribute('data-title');
+                const duration = activeSession.getAttribute('data-duration');
+                const instructor = activeSession.getAttribute('data-instructor');
+                const audioSrc = activeSession.getAttribute(`data-audio-${lang}`) || activeSession.getAttribute('data-audio-en');
+
+                if (sessionTitle) sessionTitle.textContent = title;
+                if (sessionDetails) sessionDetails.textContent = `${duration} • ${instructor}`;
+                if (durationEl) durationEl.textContent = duration;
+                if (audioPlayer) audioPlayer.src = audioSrc;
+
+                if (playerControlsDiv) playerControlsDiv.style.display = '';
+                if (playerActionsDiv) playerActionsDiv.style.display = 'flex';
+            }
+        }
+    }
+
+    // Fix: Sleep/Relaxation audio handling for meditation.html
+    // (Ensure sleepPlayBtns and soundCards work with visualizer and player UI)
+    if (sleepPlayBtns.length > 0) {
+        sleepPlayBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const card = this.closest('.sleep-card');
+                if (!card) return;
+
+                const audioSrc = card.getAttribute('data-audio');
+                const title = card.getAttribute('data-title');
+                const duration = card.getAttribute('data-duration');
+                const instructor = card.getAttribute('data-instructor');
+                const loop = card.getAttribute('data-loop') === 'true';
+
+                // Remove any previous .session-item.active
+                sessionItems.forEach(i => i.classList.remove('active'));
+                // Set player UI and play audio
+                loadAndPlayAudio(audioSrc, title, duration, instructor, loop);
+
+                // Show player controls and actions if hidden
+                if (playerControlsDiv) playerControlsDiv.style.display = '';
+                if (playerActionsDiv) playerActionsDiv.style.display = 'flex';
+
+                // Start visualizer if needed
+                if (userInteracted) setupAudioContext();
+            });
+        });
+    }
+
+    if (soundCards.length > 0) {
+        soundCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const soundType = this.getAttribute('data-sound');
+                let audioSrc, title;
+                switch(soundType) {
+                    case 'rain': 
+                        audioSrc = 'assets/audio/rain.mp3'; 
+                        title = 'Rain Sounds';
+                        break;
+                    case 'wind': 
+                        audioSrc = 'assets/audio/wind.mp3'; 
+                        title = 'Wind Sounds';
+                        break;
+                    case 'fire': 
+                        audioSrc = 'assets/audio/fire.mp3'; 
+                        title = 'Fireplace Sounds';
+                        break;
+                    case 'white-noise': 
+                        audioSrc = 'assets/audio/forest.mp3'; 
+                        title = 'Forest';
+                        break;
+                    default: 
+                        audioSrc = 'assets/audio/music.mp3';
+                        title = 'Ambient Sound';
+                }
+                // Remove any previous .session-item.active
+                sessionItems.forEach(i => i.classList.remove('active'));
+                loadAndPlayAudio(audioSrc, title, 'Continuous', 'Natural Sounds', true);
+
+                if (playerControlsDiv) playerControlsDiv.style.display = '';
+                if (playerActionsDiv) playerActionsDiv.style.display = 'flex';
+                if (userInteracted) setupAudioContext();
+            });
+        });
+    }
+
+    // Visualizer setup
+    window.audioContext = null; 
+    let analyser, dataArray, sourceNode, animationFrameId;
+    let isVisualizing = false;
+    const canvas = document.getElementById('visualizer');
+    let ctx;
+
+    if (canvas) {
+        ctx = canvas.getContext('2d');
+        function resizeCanvas() { 
+            if(canvas && ctx) { 
+                const playerVisualization = canvas.closest('.player-visualization');
+                if (playerVisualization) {
+                    canvas.width = playerVisualization.offsetWidth; 
+                    canvas.height = playerVisualization.offsetHeight;
+                } else {
+                    canvas.width = canvas.offsetWidth;
+                    canvas.height = canvas.offsetHeight;
+                }
+            }
+        }
+        resizeCanvas(); 
+        window.addEventListener('resize', resizeCanvas); 
+    }
+    
+    function setupAudioContext() {
+        if (!audioPlayer || !canvas || !userInteracted) return; 
+
+        if (!window.audioContext) {
+            try {
+                window.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            } catch (e) {
+                console.error("Error CREATING AudioContext:", e); return;
+            }
+        }
+
+        if (window.audioContext.state === 'suspended') {
+            window.audioContext.resume().catch(e => console.error("Error RESUMING AudioContext in setup:", e));
+        }
+
+        if (!sourceNode || sourceNode.mediaElement !== audioPlayer) {
+            if (sourceNode) { try { sourceNode.disconnect(); } catch(e){} }
+            try {
+                sourceNode = window.audioContext.createMediaElementSource(audioPlayer);
+            } catch (e) {
+                console.error("Error CREATING MediaElementSourceNode:", e);
+                isVisualizing = false; if (animationFrameId) cancelAnimationFrame(animationFrameId); return; 
+            }
+        }
+        
+        if (!analyser) {
+            analyser = window.audioContext.createAnalyser();
+            analyser.fftSize = 256; 
+        }
+        
+        try {
+            sourceNode.disconnect(analyser); // Disconnect previous if any
+            analyser.disconnect(window.audioContext.destination); // Disconnect previous if any
+        } catch(e) { /* ignore if not connected */ }
+
+        sourceNode.connect(analyser);
+        analyser.connect(window.audioContext.destination);
+        
+        dataArray = new Uint8Array(analyser.frequencyBinCount); 
+        isVisualizing = true;
+        if (animationFrameId) cancelAnimationFrame(animationFrameId); 
+        visualize();
+    }
+
+    function visualize() {
+        if (!isVisualizing || !analyser || !ctx || !canvas || !dataArray || !window.audioContext || window.audioContext.state !== 'running') {
+            if (animationFrameId) { cancelAnimationFrame(animationFrameId); animationFrameId = null; }
+            if (ctx && canvas && isVisualizing) ctx.clearRect(0, 0, canvas.width, canvas.height); 
+            isVisualizing = false; 
+            return;
+        }
+        
+        animationFrameId = requestAnimationFrame(visualize);
+        analyser.getByteFrequencyData(dataArray); 
+        
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const barWidth = (canvas.width / (dataArray.length * 0.8)) * 1.2;
+        let x = 0;
+        const numBars = dataArray.length * 0.8; 
+        
+        for (let i = 0; i < numBars; i++) {
+            const barHeight = dataArray[i] * (canvas.height / 256) * 0.8; 
+            const hue = i * (360 / numBars); 
+            ctx.fillStyle = `hsla(${hue}, 70%, 60%, 0.6)`; 
+            ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+            x += barWidth + 2; 
+        }
+    }
+    
+    // Breathing Animation
+    let breathingInterval;
+    let breathCycleState = 'in'; 
+    let breathTimer = 0;
+    const inhaleTime = 4; 
+    const exhaleTime = 4; 
+
+    function updateBreathingAnimation() {
+        if (!breathingInstruction) return;
+        const circles = document.querySelectorAll('.breathing-animation .circle');
+        if (!circles.length) return;
+
+        breathTimer++;
+        let scaleFactor, opacityFactor;
+
+        switch (breathCycleState) {
+            case 'in':
+                breathingInstruction.textContent = "Breathe In";
+                scaleFactor = 0.8 + 0.4 * (breathTimer / inhaleTime);
+                opacityFactor = 0.3 + 0.5 * (breathTimer / inhaleTime);
+                if (breathTimer >= inhaleTime) { breathCycleState = 'out'; breathTimer = 0; }
+                break;
+            case 'out':
+                breathingInstruction.textContent = "Breathe Out";
+                scaleFactor = 1.2 - 0.4 * (breathTimer / exhaleTime);
+                opacityFactor = 0.8 - 0.5 * (breathTimer / exhaleTime);
+                if (breathTimer >= exhaleTime) { breathCycleState = 'in'; breathTimer = 0; }
+                break;
+        }
+        circles.forEach(c => {
+            c.style.transform = `scale(${Math.max(0.1, Math.min(1.5, scaleFactor))})`; // Clamp values
+            c.style.opacity = `${Math.max(0, Math.min(1, opacityFactor))}`;
+        });
+    }
+
+    function startBreathingAnimation() {
+        if (!breathingInstruction || !document.querySelector('.breathing-animation')) return;
+        clearInterval(breathingInterval); 
+        breathCycleState = 'in'; 
+        breathTimer = 0;
+        updateBreathingAnimation(); 
+        breathingInterval = setInterval(updateBreathingAnimation, 1000); 
+    }
+
+    function stopBreathingAnimation() {
+        if (!breathingInstruction || !document.querySelector('.breathing-animation')) return;
+        clearInterval(breathingInterval);
+    }
+    
+    // Start breathing animation by default if on home page and no main audio playing
+    // Or if on meditation page and main audio starts (handled in audioPlayer.onplay)
+    if (breathingInstruction && document.getElementById('home') && (!document.getElementById('meditate'))) { // Only on home.html and not on meditate.html
+        if (!audioPlayer || audioPlayer.paused) {
+            startBreathingAnimation();
+        }
+    }
+
+
+    // Volume Controls
+    const volumeSlider = document.getElementById('volume');
+    const volumeBtn = document.getElementById('volume-btn');
+
+    if (volumeSlider && audioPlayer && volumeBtn) {
+        audioPlayer.volume = parseFloat(volumeSlider.value);
+        volumeSlider.addEventListener('input', () => {
+            audioPlayer.volume = volumeSlider.value;
+            updateVolumeIcon(volumeSlider.value);
+        });
+        volumeBtn.addEventListener('click', () => {
+            audioPlayer.muted = !audioPlayer.muted;
+            updateVolumeIcon(audioPlayer.muted ? 0 : audioPlayer.volume);
+            volumeSlider.value = audioPlayer.muted ? 0 : audioPlayer.volume;
+        });
+        function updateVolumeIcon(volume) {
+            if (audioPlayer.muted || volume == 0) {
+                volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            } else if (volume < 0.5) {
+                volumeBtn.innerHTML = '<i class="fas fa-volume-down"></i>';
+            } else {
+                volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+            }
+        }
+        updateVolumeIcon(audioPlayer.volume);
+    }
+
+    // Rewind and Forward Buttons
+    const rewindBtn = document.getElementById('rewind');
+    const forwardBtn = document.getElementById('forward');
+
+    if (rewindBtn && audioPlayer) {
+        rewindBtn.addEventListener('click', () => {
+            audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 10);
+        });
+    }
+    if (forwardBtn && audioPlayer) {
+        forwardBtn.addEventListener('click', () => {
+            if (audioPlayer.duration && !isNaN(audioPlayer.duration) && audioPlayer.duration !== Infinity) {
+                audioPlayer.currentTime = Math.min(audioPlayer.duration, audioPlayer.currentTime + 10);
+            } else if (audioPlayer.duration === Infinity) { // For live streams or infinite loops, maybe do nothing or give feedback
+                // Potentially do nothing for infinite streams
+            }
+        });
+    }
+
+    // Stats Counter (for home.html)
+    const statNumbers = document.querySelectorAll('.stat-number');
+    if (statNumbers.length > 0 && typeof $.fn.waypoint !== 'undefined' && document.querySelector('.stats-section')) {
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) { // Ensure we are on a page with stats section
+            new Waypoint({
+                element: statsSection,
+                handler: function() {
+                    statNumbers.forEach(stat => {
+                        const countTo = parseFloat(stat.getAttribute('data-count'));
+                        const suffix = stat.getAttribute('data-suffix') || '';
+                        let current = 0;
+                        const increment = countTo / 100;
+
+                        const updateCount = () => {
+                            current += increment;
+                            if (current < countTo) {
+                                stat.textContent = (countTo % 1 !== 0 ? current.toFixed(1) : Math.ceil(current)) + suffix;
+                                requestAnimationFrame(updateCount);
+                            } else {
+                                stat.textContent = countTo + suffix;
+                            }
+                        };
+                        updateCount();
+                    });
+                    this.destroy(); 
+                },
+                offset: '80%' 
+            });
+        }
+    }
+
+
+        // --- TIMER MODAL LOGIC ---
+    (function() {
+        let timerInterval = null;
+        let totalSeconds = 300; // default 5 min
+        let remainingSeconds = totalSeconds;
+        let timerRunning = false;
+        let alarmEnabled = false;
+        const minutesEl = document.getElementById('timer-minutes');
+        const secondsEl = document.getElementById('timer-seconds');
+        const startBtn = document.getElementById('start-timer-modal-btn');
+        const stopBtn = document.getElementById('stop-timer-modal-btn');
+        const statusEl = document.getElementById('timer-status');
+        const timerModal = document.getElementById('timerModal');
+        const alarmCheckbox = document.getElementById('timer-alarm-checkbox');
+        const floatingDisplay = document.getElementById('floating-timer-display');
+        const floatingBtn = document.getElementById('floating-timer-btn');
+        let bsModal = null;
+        if (window.bootstrap && timerModal) bsModal = bootstrap.Modal.getOrCreateInstance(timerModal);
+
+        function updateDisplay() {
+            const mins = Math.floor(remainingSeconds / 60);
+            const secs = remainingSeconds % 60;
+            if (minutesEl) minutesEl.textContent = (mins < 10 ? '0' : '') + mins;
+            if (secondsEl) secondsEl.textContent = (secs < 10 ? '0' : '') + secs;
+            if (timerRunning && floatingDisplay) {
+                floatingDisplay.textContent = (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
+                floatingDisplay.style.display = 'block';
+            } else if (floatingDisplay) {
+                floatingDisplay.style.display = 'none';
+            }
+        }
+        function setTimer(seconds) {
+            remainingSeconds = Math.max(0, Math.min(3600, seconds));
+            updateDisplay();
+        }
+        function changeTimer(delta) {
+            setTimer(remainingSeconds + delta);
+        }
+        function startTimer() {
+            if (timerRunning || remainingSeconds <= 0) return;
+            timerRunning = true;
+            if (startBtn) startBtn.classList.add('d-none');
+            if (stopBtn) stopBtn.classList.remove('d-none');
+            if (statusEl) statusEl.textContent = '';
+            updateDisplay();
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (remainingSeconds > 0) {
+                    remainingSeconds--;
+                    updateDisplay();
+                } else {
+                    stopTimer(true);
+                }
+            }, 1000);
+        }
+        function stopTimer(finished) {
+            timerRunning = false;
+            if (timerInterval) clearInterval(timerInterval);
+            if (startBtn) startBtn.classList.remove('d-none');
+            if (stopBtn) stopBtn.classList.add('d-none');
+            if (floatingDisplay) floatingDisplay.style.display = 'none';
+            if (finished) {
+                if (statusEl) statusEl.textContent = 'Time is up!';
+                if (alarmEnabled) {
+                    // Try to play a sound or show a notification
+                    if (window.Notification && Notification.permission === 'granted') {
+                        new Notification('Meditation Timer', { body: 'Time is up!' });
+                    } else if (window.Notification && Notification.permission !== 'denied') {
+                        Notification.requestPermission().then(function (permission) {
+                            if (permission === 'granted') {
+                                new Notification('Meditation Timer', { body: 'Time is up!' });
+                            }
+                        });
+                    }
+                    // Fallback: beep
+                    try {
+                        const beep = new Audio('assets/audio/bell.mp3');
+                        beep.play();
+                    } catch(e) {}
+                }
+                setTimeout(() => {
+                    if (bsModal) bsModal.hide();
+                    if (statusEl) statusEl.textContent = '';
+                }, 1200);
+            } else {
+                if (statusEl) statusEl.textContent = '';
+            }
+            // Reset timer only if finished, otherwise keep last set value
+            if (finished) setTimer(totalSeconds);
+        }
+        // Button events
+        document.querySelectorAll('.timer-btn').forEach(btn => {
+            btn.onclick = function() {
+                const delta = parseInt(this.getAttribute('data-change'), 10) * 60;
+                changeTimer(delta);
+            };
+        });
+        document.querySelectorAll('.preset-btn').forEach(btn => {
+            btn.onclick = function() {
+                const mins = parseInt(this.getAttribute('data-minutes'), 10);
+                setTimer(mins * 60);
+            };
+        });
+        if (alarmCheckbox) alarmCheckbox.onchange = function() {
+            alarmEnabled = alarmCheckbox.checked;
+        };
+        if (startBtn) startBtn.onclick = function() {
+            if (remainingSeconds <= 0) {
+                if (statusEl) statusEl.textContent = 'Set a valid time!';
+                return;
+            }
+            totalSeconds = remainingSeconds;
+            alarmEnabled = alarmCheckbox && alarmCheckbox.checked;
+            startTimer();
+            if (bsModal) bsModal.hide(); // Hide modal after starting
+        };
+        if (stopBtn) stopBtn.onclick = function() {
+            stopTimer(false);
+        };
+        if (timerModal) {
+            timerModal.addEventListener('show.bs.modal', function() {
+                // Don't stop timer, just update modal display
+                setTimer(remainingSeconds);
+                if (alarmCheckbox) alarmCheckbox.checked = alarmEnabled;
+                if (timerRunning) {
+                    startBtn.classList.add('d-none');
+                    stopBtn.classList.remove('d-none');
+                } else {
+                    startBtn.classList.remove('d-none');
+                    stopBtn.classList.add('d-none');
+                }
+            });
+            timerModal.addEventListener('hidden.bs.modal', function() {
+                // Don't stop timer, just hide modal
+                if (timerRunning && floatingDisplay) floatingDisplay.style.display = 'block';
+            });
+        }
+        // Hide floating display if modal is opened
+        if (floatingBtn && floatingDisplay) {
+            floatingBtn.addEventListener('click', function() {
+                if (timerRunning) floatingDisplay.style.display = 'block';
+            });
+        }
+        // Initialize
+        setTimer(totalSeconds);
+    })();
+
+    // --- END OF TIMER MODAL LOGIC ---
+
+
+    // Form Validations
+    const newsletterFormHome = document.getElementById('newsletter-form'); // home.html
+    const newsletterFormMeditation = document.getElementById('newsletter-form-meditation'); // meditation.html
+
+    function handleNewsletterSubmit(formElement, emailId, privacyId) {
+        if (!formElement) return;
+        formElement.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById(emailId);
+            const privacyCheck = document.getElementById(privacyId);
+            if (!emailInput || !privacyCheck) return;
+
+            if (!emailInput.value || !emailInput.checkValidity()) {
+                alert("Please enter a valid email address.");
+                emailInput.focus();
+                return;
+            }
+            if (!privacyCheck.checked) {
+                alert("Please agree to the privacy policy.");
+                privacyCheck.focus();
+                return;
+            }
+            alert("Thank you for subscribing!");
+            this.reset();
+        });
+    }
+    handleNewsletterSubmit(newsletterFormHome, 'newsletter-email', 'privacy-check');
+    handleNewsletterSubmit(newsletterFormMeditation, 'newsletter-email-meditation', 'privacy-check-meditation');
+
+
+    // --- HOME.HTML POPUP & MAIN-AUDIO LOGIC ---
+    if (window.location.pathname.endsWith('/meditation
+/home.html') || window.location.pathname.endsWith('/')) {
+        const popup = document.getElementById('announcement-popup');
+        const closeBtn = document.getElementById('announcement-close-btn');
+        const mainAudio = document.getElementById('main-audio');
+        const playPauseBtn = document.getElementById('play-pause');
+        const progressBar = document.getElementById('progress-bar');
+        const currentTimeEl = document.querySelector('.current-time');
+        const durationEl = document.querySelector('.duration');
+        const playerControlsDiv = document.querySelector('.player-controls');
+        const playerActionsDiv = document.querySelector('.player-actions');
+        const canvas = document.getElementById('visualizer');
+        let ctx = canvas ? canvas.getContext('2d') : null;
+        let audioContext, analyser, sourceNode, dataArray, animationFrameId;
+        let isVisualizing = false;
+
+        function resizeCanvas() {
+            if (canvas && ctx) {
+                const playerVisualization = canvas.closest('.player-visualization');
+                if (playerVisualization) {
+                    canvas.width = playerVisualization.offsetWidth;
+                    canvas.height = playerVisualization.offsetHeight;
+                } else {
+                    canvas.width = canvas.offsetWidth;
+                    canvas.height = canvas.offsetHeight;
+                }
+            }
+        }
+
+        function setupVisualizer() {
+            if (!mainAudio || !canvas) return;
+            if (!audioContext) {
+                try {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                } catch (e) { return; }
+            }
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            if (!sourceNode || sourceNode.mediaElement !== mainAudio) {
+                if (sourceNode) { try { sourceNode.disconnect(); } catch(e){} }
+                try {
+                    sourceNode = audioContext.createMediaElementSource(mainAudio);
+                } catch (e) { return; }
+            }
+            if (!analyser) {
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 256;
+            }
+            try {
+                sourceNode.disconnect(analyser);
+                analyser.disconnect(audioContext.destination);
+            } catch(e) {}
+            sourceNode.connect(analyser);
+            analyser.connect(audioContext.destination);
+            dataArray = new Uint8Array(analyser.frequencyBinCount);
+            isVisualizing = true;
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            visualize();
+        }
+
+        function visualize() {
+            if (!isVisualizing || !analyser || !ctx || !canvas || !dataArray || !audioContext || audioContext.state !== 'running') {
+                if (animationFrameId) { cancelAnimationFrame(animationFrameId); animationFrameId = null; }
+                if (ctx && canvas && isVisualizing) ctx.clearRect(0, 0, canvas.width, canvas.height);
+                isVisualizing = false;
+                return;
+            }
+            animationFrameId = requestAnimationFrame(visualize);
+            analyser.getByteFrequencyData(dataArray);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const barWidth = (canvas.width / (dataArray.length * 0.8)) * 1.2;
+            let x = 0;
+            const numBars = dataArray.length * 0.8;
+            for (let i = 0; i < numBars; i++) {
+                const barHeight = dataArray[i] * (canvas.height / 256) * 0.8;
+                const hue = i * (360 / numBars);
+                ctx.fillStyle = `hsla(${hue}, 70%, 60%, 0.6)`;
+                ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+                x += barWidth + 2;
+            }
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds) || seconds === Infinity || typeof seconds !== 'number') return '∞';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        function updateProgress() {
+            if (!mainAudio || !progressBar || !currentTimeEl) return;
+            const { currentTime, duration } = mainAudio;
+            if (isNaN(duration) || duration === Infinity) {
+                progressBar.style.width = '0%';
+            } else {
+                const progressPercent = (currentTime / duration) * 100;
+                progressBar.style.width = `${progressPercent}%`;
+            }
+            currentTimeEl.textContent = formatTime(currentTime);
+        }
+
+        // Popup close logic: play audio, show controls, start visualizer
+        if (popup && closeBtn && mainAudio) {
+            closeBtn.onclick = function() {
+                popup.style.display = 'none';
+                mainAudio.currentTime = 0;
+                mainAudio.play();
+                if (playerControlsDiv) playerControlsDiv.style.display = '';
+                if (playerActionsDiv) playerActionsDiv.style.display = 'flex';
+                resizeCanvas();
+                setupVisualizer();
+            };
+            window.addEventListener('resize', resizeCanvas);
+        }
+
+        // Play/Pause button logic (optional: allow user to pause/resume after popup)
+        if (playPauseBtn && mainAudio) {
+            playPauseBtn.onclick = function() {
+                if (mainAudio.paused) {
+                    mainAudio.play();
+                } else {
+                    mainAudio.pause();
+                }
+            };
+            mainAudio.addEventListener('play', function() {
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                setupVisualizer();
+            });
+            mainAudio.addEventListener('pause', function() {
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                if (animationFrameId) { cancelAnimationFrame(animationFrameId); animationFrameId = null; }
+                isVisualizing = false;
+                if(ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height);
+            });
+        }
+
+        // Progress bar and time update
+        if (mainAudio) {
+            mainAudio.addEventListener('timeupdate', updateProgress);
+            mainAudio.addEventListener('loadedmetadata', function() {
+                if (durationEl) durationEl.textContent = formatTime(mainAudio.duration);
+                updateProgress();
+            });
+            mainAudio.addEventListener('ended', function() {
+                if (progressBar) progressBar.style.width = '0%';
+                if (currentTimeEl) currentTimeEl.textContent = formatTime(0);
+            });
+        }
+
+        // Progress bar click to seek
+        const progressBarContainer = document.querySelector('.progress-container');
+        const progressBarClickTarget = document.querySelector('.progress-bar-clickable-area') || progressBarContainer;
+        if (progressBarClickTarget && mainAudio) {
+            progressBarClickTarget.addEventListener('click', (e) => {
+                if (!mainAudio.duration || isNaN(mainAudio.duration) || mainAudio.duration === Infinity) return;
+                const rect = progressBarClickTarget.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const width = progressBarClickTarget.clientWidth;
+                const duration = mainAudio.duration;
+                mainAudio.currentTime = (clickX / width) * duration;
+            });
+        }
+    }
+
+});
