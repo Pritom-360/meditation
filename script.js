@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const promise = bgMusic.play();
             if (promise !== undefined) {
                 promise.catch(error => {
+                    // Only log error, do not try to play again until user interacts
                     console.error("[BG Music] Playback FAILED:", error.name, error.message);
                 });
             }
@@ -869,7 +870,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const audioStartBtn = document.getElementById('audio-start-btn');
     if (audioStartOverlay && audioStartBtn && bgMusic) {
         setTimeout(() => {
-            if (bgMusic.paused) {
+            // Only show overlay if bgMusic is paused and user hasn't interacted
+            if (bgMusic.paused && !userInteracted) {
                 audioStartOverlay.style.display = 'flex';
             } else {
                 audioStartOverlay.style.display = 'none';
@@ -880,8 +882,7 @@ document.addEventListener('DOMContentLoaded', function() {
         audioStartOverlay.onclick = null;
         audioStartBtn.onclick = function(e) {
             e.stopPropagation();
-            if (!userInteracted) handleFirstUserInteraction({type: 'audioStartBtnClick'});
-            userInteracted = true;
+            if (!userInteracted) userInteracted = true;
             const playPromise = bgMusic.play();
             if (playPromise !== undefined) {
                 playPromise.then(() => {
