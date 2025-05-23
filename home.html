@@ -423,8 +423,24 @@
     <script>
         // Small script for current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Ensure popup works on GitHub Pages
+        document.addEventListener('DOMContentLoaded', function() {
+            const popup = document.getElementById('announcement-popup');
+            const closeBtn = document.getElementById('announcement-close-btn');
+            const mainAudio = document.getElementById('main-audio');
+            
+            if (popup && closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    popup.style.display = 'none';
+                    if (mainAudio) {
+                        mainAudio.play().catch(function(error) {
+                            console.log("Audio play failed:", error);
+                        });
+                    }
+                });
+            }
+        });
     </script>
-
 </body>
-
 </html>
